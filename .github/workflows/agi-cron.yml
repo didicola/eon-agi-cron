@@ -38,24 +38,16 @@ jobs:
           PASS=$(python3 -c "import json;print(json.load(open('/tmp/health.json')).get('passed',0))")
           MODS=$(python3 -c "import json;print(json.load(open('/tmp/health.json')).get('mods',0))")
           BP=$(python3 -c "import json;print(json.load(open('/tmp/health.json')).get('best_prompt','direct'))")
-
           echo "authoring goal via cloud-brain (curl) ..."
           curl -sf -m 40 -X POST "https://cloud-brain.eon-sovereign.workers.dev/v1/chat/completions" \
             -H "Content-Type: application/json" \
             -d "{\"model\":\"deepseek-chat\",\"max_tokens\":60,\"messages\":[{\"role\":\"user\",\"content\":\"You are an autonomous self-improvement engine. Cloud stats: cycles=$CYCLES, passed=$PASS, self-mods=$MODS, best_prompt=$BP. Propose ONE concrete engineering improvement for your own pipeline (e.g. better verification strategy, new task type, prompt technique). Reply with exactly one short imperative sentence, no quotes, no preamble.\"}]}" \
             > /tmp/brain.json
-          GOAL=$(python3 -c "
-import json
-r = json.load(open('/tmp/brain.json'))
-print(r['choices'][0]['message']['content'].strip().splitlines()[-1][:120])")
+          GOAL=$(python3 -c "import json;r=json.load(open('/tmp/brain.json'));print(r['choices'][0]['message']['content'].strip().splitlines()[-1][:120])")
           echo "GOAL: $GOAL"
-
           TS=$(date -u +%FT%TZ)
           TEXT="[agi-loop goal C ${TS} cycle=${CYCLES}] ${GOAL}"
-          python3 -c "
-import json, sys
-json.dump({'text': sys.argv[1], 'pin': True}, open('/tmp/pin.json','w'))" "$TEXT"
-
+          python3 -c "import json,sys;json.dump({'text':sys.argv[1],'pin':True},open('/tmp/pin.json','w'))" "$TEXT"
           echo "pinning to ghost (curl) ..."
           curl -sf -m 20 -X POST "https://ghost.eon-sovereign.workers.dev/memory?token=${GHOST_TOKEN}" \
             -H "Content-Type: application/json" --data @/tmp/pin.json
