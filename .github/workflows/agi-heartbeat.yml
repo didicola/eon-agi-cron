@@ -1,4 +1,4 @@
-name: eon-agi-cron
+name: eon-agi-heartbeat
 
 on:
   schedule:
