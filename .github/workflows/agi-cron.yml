@@ -24,11 +24,11 @@ jobs:
   goal:
     if: github.event.schedule == '17 * * * *' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 6
     env:
       GHOST_TOKEN: ${{ secrets.GHOST_TOKEN }}
     steps:
-      - name: Author cloud goal via cloud-brain (curl) and pin to ghost (curl)
+      - name: Author cloud goal via cloud-brain and pin to ghost (with read-back)
         run: |
           set -e
           echo "[$(date -u +%FT%TZ)] fetching eon-agi stats ..."
@@ -52,6 +52,10 @@ jobs:
           curl -sf -m 20 -X POST "https://ghost.eon-sovereign.workers.dev/memory?token=${GHOST_TOKEN}" \
             -H "Content-Type: application/json" --data @/tmp/pin.json
           echo ""
+          sleep 3
+          echo "read-back verification ..."
+          curl -sf -m 20 "https://ghost.eon-sovereign.workers.dev/memory?token=${GHOST_TOKEN}" > /tmp/ghost_mem.json
+          python3 -c "import json,sys;mem=json.load(open('/tmp/ghost_mem.json'));needle=json.loads(open('/tmp/pin.json').read())['text'][:60];found=any(needle in str(e.get('text','')) for e in mem);print('READ-BACK:','FOUND' if found else 'NOT FOUND','| needle:',needle);sys.exit(0 if found else 1)"
           echo "done"
 
   heartbeat:
