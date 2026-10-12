@@ -3,30 +3,90 @@ name: eon-agi-cron
 on:
   schedule:
     - cron: '*/10 * * * *'
+    - cron: '17 * * * *'
   workflow_dispatch:
 
 jobs:
   tick:
+    if: github.event.schedule == '*/10 * * * *' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Trigger cloud AGI self-improvement cycle
+      - name: Trigger cloud AGI self-improvement cycles
         run: |
           echo "[$(date -u +%FT%TZ)] firing eon-agi /run-cron ..."
           curl -sf -m 40 -X POST "https://eon-agi.eon-sovereign.workers.dev/run-cron" \
-            -H "Content-Type: application/json" | tee /tmp/out.json
+            -H "Content-Type: application/json"
           echo ""
-          curl -sf -m 20 "https://eon-agi.eon-sovereign.workers.dev/health" | tee /tmp/health.json
+          curl -sf -m 20 "https://eon-agi.eon-sovereign.workers.dev/health"
           echo ""
-          grep -q '"ok":true' /tmp/health.json
 
-      - name: Hourly heartbeat (keeps repo active so cron is never auto-disabled)
-        if: github.event.schedule == '0 * * * *'
+  goal:
+    if: github.event.schedule == '17 * * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GHOST_TOKEN: ${{ secrets.GHOST_TOKEN }}
+    steps:
+      - name: Author cloud goal via cloud-brain and pin to ghost
         run: |
-          mkdir -p hb
-          date -u +%FT%TZ > hb/last_beat.txt
-          git config user.name "eon-agi-cron"
-          git config user.email "cron@eon.local"
+          set -e
+          echo "[$(date -u +%FT%TZ)] fetching eon-agi stats ..."
+          HEALTH=$(curl -sf -m 20 "https://eon-agi.eon-sovereign.workers.dev/health")
+          echo "$HEALTH"
+          echo "$HEALTH" > /tmp/health.json
+
+          GOAL=$(python3 - <<'PY'
+          import json, os, urllib.request
+          h = json.load(open('/tmp/health.json'))
+          prompt = (
+              "You are an autonomous self-improvement engine for a reasoning system. "
+              f"Cloud stats: cycles={h.get('cycles')}, passed={h.get('passed')}, "
+              f"self-mods={h.get('mods')}, best_prompt={h.get('best_prompt')}. "
+              "Propose ONE concrete engineering improvement for your own pipeline "
+              "(e.g. a better verification strategy, a new task type, a prompt technique). "
+              "Reply with exactly one short imperative sentence, no quotes, no preamble."
+          )
+          req = urllib.request.Request(
+              "https://cloud-brain.eon-sovereign.workers.dev/v1/chat/completions",
+              data=json.dumps({"model":"deepseek-chat","max_tokens":60,
+                               "messages":[{"role":"user","content":prompt}]}).encode(),
+              headers={"Content-Type":"application/json"})
+          r = json.load(urllib.request.urlopen(req, timeout=40))
+          goal = r["choices"][0]["message"]["content"].strip().splitlines()[-1][:120]
+          print(goal)
+          PY
+          )
+          echo "GOAL: $GOAL"
+
+          TS=$(date -u +%FT%TZ)
+          CYCLES=$(python3 -c "import json;print(json.load(open('/tmp/health.json')).get('cycles',0))")
+          TEXT="[agi-loop goal C ${TS} cycle=${CYCLES}] ${GOAL}"
+
+          echo "pinning to ghost ..."
+          python3 - <<PY
+          import json, os, urllib.request
+          token = os.environ["GHOST_TOKEN"]
+          text = """${TEXT}"""
+          req = urllib.request.Request(
+              f"https://ghost.eon-sovereign.workers.dev/memory?token={token}",
+              data=json.dumps({"text": text, "pin": True}).encode(),
+              headers={"Content-Type": "application/json"})
+          r = json.load(urllib.request.urlopen(req, timeout=20))
+          print("ghost:", r)
+          PY
+          echo "done"
+
+  heartbeat:
+    if: github.event.schedule == '17 * * * *'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hourly heartbeat (keeps cron alive)
+        run: |
+          mkdir -p hb; date -u +%FT%TZ > hb/last_beat.txt
+          git config user.name "eon-agi-cron"; git config user.email "cron@eon.local"
           git add hb/last_beat.txt
           git diff --cached --quiet || git commit -m "heartbeat: $(date -u +%FT%TZ)"
           git push || true
