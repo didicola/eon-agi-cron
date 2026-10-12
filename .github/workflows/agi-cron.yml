@@ -28,53 +28,38 @@ jobs:
     env:
       GHOST_TOKEN: ${{ secrets.GHOST_TOKEN }}
     steps:
-      - name: Author cloud goal via cloud-brain and pin to ghost
+      - name: Author cloud goal via cloud-brain (curl) and pin to ghost (curl)
         run: |
           set -e
           echo "[$(date -u +%FT%TZ)] fetching eon-agi stats ..."
-          HEALTH=$(curl -sf -m 20 "https://eon-agi.eon-sovereign.workers.dev/health")
-          echo "$HEALTH"
-          echo "$HEALTH" > /tmp/health.json
+          curl -sf -m 20 "https://eon-agi.eon-sovereign.workers.dev/health" > /tmp/health.json
+          cat /tmp/health.json
+          CYCLES=$(python3 -c "import json;print(json.load(open('/tmp/health.json')).get('cycles',0))")
+          PASS=$(python3 -c "import json;print(json.load(open('/tmp/health.json')).get('passed',0))")
+          MODS=$(python3 -c "import json;print(json.load(open('/tmp/health.json')).get('mods',0))")
+          BP=$(python3 -c "import json;print(json.load(open('/tmp/health.json')).get('best_prompt','direct'))")
 
-          GOAL=$(python3 - <<'PY'
-          import json, os, urllib.request
-          h = json.load(open('/tmp/health.json'))
-          prompt = (
-              "You are an autonomous self-improvement engine for a reasoning system. "
-              f"Cloud stats: cycles={h.get('cycles')}, passed={h.get('passed')}, "
-              f"self-mods={h.get('mods')}, best_prompt={h.get('best_prompt')}. "
-              "Propose ONE concrete engineering improvement for your own pipeline "
-              "(e.g. a better verification strategy, a new task type, a prompt technique). "
-              "Reply with exactly one short imperative sentence, no quotes, no preamble."
-          )
-          req = urllib.request.Request(
-              "https://cloud-brain.eon-sovereign.workers.dev/v1/chat/completions",
-              data=json.dumps({"model":"deepseek-chat","max_tokens":60,
-                               "messages":[{"role":"user","content":prompt}]}).encode(),
-              headers={"Content-Type":"application/json"})
-          r = json.load(urllib.request.urlopen(req, timeout=40))
-          goal = r["choices"][0]["message"]["content"].strip().splitlines()[-1][:120]
-          print(goal)
-          PY
-          )
+          echo "authoring goal via cloud-brain (curl) ..."
+          curl -sf -m 40 -X POST "https://cloud-brain.eon-sovereign.workers.dev/v1/chat/completions" \
+            -H "Content-Type: application/json" \
+            -d "{\"model\":\"deepseek-chat\",\"max_tokens\":60,\"messages\":[{\"role\":\"user\",\"content\":\"You are an autonomous self-improvement engine. Cloud stats: cycles=$CYCLES, passed=$PASS, self-mods=$MODS, best_prompt=$BP. Propose ONE concrete engineering improvement for your own pipeline (e.g. better verification strategy, new task type, prompt technique). Reply with exactly one short imperative sentence, no quotes, no preamble.\"}]}" \
+            > /tmp/brain.json
+          GOAL=$(python3 -c "
+import json
+r = json.load(open('/tmp/brain.json'))
+print(r['choices'][0]['message']['content'].strip().splitlines()[-1][:120])")
           echo "GOAL: $GOAL"
 
           TS=$(date -u +%FT%TZ)
-          CYCLES=$(python3 -c "import json;print(json.load(open('/tmp/health.json')).get('cycles',0))")
           TEXT="[agi-loop goal C ${TS} cycle=${CYCLES}] ${GOAL}"
+          python3 -c "
+import json, sys
+json.dump({'text': sys.argv[1], 'pin': True}, open('/tmp/pin.json','w'))" "$TEXT"
 
-          echo "pinning to ghost ..."
-          python3 - <<PY
-          import json, os, urllib.request
-          token = os.environ["GHOST_TOKEN"]
-          text = """${TEXT}"""
-          req = urllib.request.Request(
-              f"https://ghost.eon-sovereign.workers.dev/memory?token={token}",
-              data=json.dumps({"text": text, "pin": True}).encode(),
-              headers={"Content-Type": "application/json"})
-          r = json.load(urllib.request.urlopen(req, timeout=20))
-          print("ghost:", r)
-          PY
+          echo "pinning to ghost (curl) ..."
+          curl -sf -m 20 -X POST "https://ghost.eon-sovereign.workers.dev/memory?token=${GHOST_TOKEN}" \
+            -H "Content-Type: application/json" --data @/tmp/pin.json
+          echo ""
           echo "done"
 
   heartbeat:
