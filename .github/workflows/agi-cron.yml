@@ -1,0 +1,32 @@
+name: eon-agi-cron
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Trigger cloud AGI self-improvement cycle
+        run: |
+          echo "[$(date -u +%FT%TZ)] firing eon-agi /run-cron ..."
+          curl -sf -m 40 -X POST "https://eon-agi.eon-sovereign.workers.dev/run-cron" \
+            -H "Content-Type: application/json" | tee /tmp/out.json
+          echo ""
+          curl -sf -m 20 "https://eon-agi.eon-sovereign.workers.dev/health" | tee /tmp/health.json
+          echo ""
+          grep -q '"ok":true' /tmp/health.json
+
+      - name: Hourly heartbeat (keeps repo active so cron is never auto-disabled)
+        if: github.event.schedule == '0 * * * *'
+        run: |
+          mkdir -p hb
+          date -u +%FT%TZ > hb/last_beat.txt
+          git config user.name "eon-agi-cron"
+          git config user.email "cron@eon.local"
+          git add hb/last_beat.txt
+          git diff --cached --quiet || git commit -m "heartbeat: $(date -u +%FT%TZ)"
+          git push || true
