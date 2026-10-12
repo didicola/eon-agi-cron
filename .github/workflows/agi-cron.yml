@@ -84,3 +84,5 @@ jobs:
           git add hb/last_beat.txt
           git diff --cached --quiet || git commit -m "heartbeat: $(date -u +%FT%TZ)"
           git push || true
+
+# schedule registered: 2026-10-12 — eon-agi cloud learning heartbeat
