@@ -39,7 +39,11 @@ jobs:
           MODS=$(python3 -c "import json;print(json.load(open('/tmp/health.json')).get('mods',0))")
           BP=$(python3 -c "import json;print(json.load(open('/tmp/health.json')).get('best_prompt','direct'))")
           echo "authoring goal via cloud-brain (curl) ..."
-          curl -sf -m 40 -X POST "https://cloud-brain.eon-sovereign.workers.dev/v1/chat/completions" \
+          for try in 1 2; do
+            curl -sf -m 90 -X POST "https://cloud-brain.eon-sovereign.workers.dev/v1/chat/completions" && break
+            echo "cloud-brain try $try failed, retrying..."
+            sleep 5
+          done \
             -H "Content-Type: application/json" \
             -d "{\"model\":\"deepseek-chat\",\"max_tokens\":60,\"messages\":[{\"role\":\"user\",\"content\":\"You are an autonomous self-improvement engine. Cloud stats: cycles=$CYCLES, passed=$PASS, self-mods=$MODS, best_prompt=$BP. Propose ONE concrete engineering improvement for your own pipeline (e.g. better verification strategy, new task type, prompt technique). Reply with exactly one short imperative sentence, no quotes, no preamble.\"}]}" \
             > /tmp/brain.json
