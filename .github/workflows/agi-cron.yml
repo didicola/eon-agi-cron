@@ -24,7 +24,7 @@ jobs:
   goal:
     if: github.event.schedule == '17 * * * *' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 8
     env:
       GHOST_TOKEN: ${{ secrets.GHOST_TOKEN }}
     steps:
@@ -38,23 +38,24 @@ jobs:
           PASS=$(python3 -c "import json;print(json.load(open('/tmp/health.json')).get('passed',0))")
           MODS=$(python3 -c "import json;print(json.load(open('/tmp/health.json')).get('mods',0))")
           BP=$(python3 -c "import json;print(json.load(open('/tmp/health.json')).get('best_prompt','direct'))")
-          echo "authoring goal via cloud-brain (curl) ..."
+          echo "authoring goal via cloud-brain (curl, 90s, 2 tries) ..."
+          CB_OK=0
           for try in 1 2; do
-            curl -sf -m 90 -X POST "https://cloud-brain.eon-sovereign.workers.dev/v1/chat/completions" && break
+            if curl -sf -m 90 -X POST "https://cloud-brain.eon-sovereign.workers.dev/v1/chat/completions" -H "Content-Type: application/json" -d "{\"model\":\"deepseek-chat\",\"max_tokens\":60,\"messages\":[{\"role\":\"user\",\"content\":\"You are an autonomous self-improvement engine. Cloud stats: cycles=$CYCLES, passed=$PASS, self-mods=$MODS, best_prompt=$BP. Propose ONE concrete engineering improvement for your own pipeline (e.g. better verification strategy, new task type, prompt technique). Reply with exactly one short imperative sentence, no quotes, no preamble.\"}]}" > /tmp/brain.json; then
+              CB_OK=1
+              break
+            fi
             echo "cloud-brain try $try failed, retrying..."
             sleep 5
-          done \
-            -H "Content-Type: application/json" \
-            -d "{\"model\":\"deepseek-chat\",\"max_tokens\":60,\"messages\":[{\"role\":\"user\",\"content\":\"You are an autonomous self-improvement engine. Cloud stats: cycles=$CYCLES, passed=$PASS, self-mods=$MODS, best_prompt=$BP. Propose ONE concrete engineering improvement for your own pipeline (e.g. better verification strategy, new task type, prompt technique). Reply with exactly one short imperative sentence, no quotes, no preamble.\"}]}" \
-            > /tmp/brain.json
+          done
+          if [ "$CB_OK" != "1" ]; then echo "cloud-brain failed after retries"; exit 1; fi
           GOAL=$(python3 -c "import json;r=json.load(open('/tmp/brain.json'));print(r['choices'][0]['message']['content'].strip().splitlines()[-1][:120])")
           echo "GOAL: $GOAL"
           TS=$(date -u +%FT%TZ)
           TEXT="[agi-loop goal C ${TS} cycle=${CYCLES}] ${GOAL}"
           python3 -c "import json,sys;json.dump({'text':sys.argv[1],'pin':True},open('/tmp/pin.json','w'))" "$TEXT"
           echo "pinning to ghost (curl) ..."
-          curl -sf -m 20 -X POST "https://ghost.eon-sovereign.workers.dev/memory?token=${GHOST_TOKEN}" \
-            -H "Content-Type: application/json" --data @/tmp/pin.json
+          curl -sf -m 20 -X POST "https://ghost.eon-sovereign.workers.dev/memory?token=${GHOST_TOKEN}" -H "Content-Type: application/json" --data @/tmp/pin.json
           echo ""
           echo "read-back verification (KV propagates up to ~90s) ..."
           for i in $(seq 1 18); do
