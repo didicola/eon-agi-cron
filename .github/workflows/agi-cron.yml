@@ -52,11 +52,19 @@ jobs:
           curl -sf -m 20 -X POST "https://ghost.eon-sovereign.workers.dev/memory?token=${GHOST_TOKEN}" \
             -H "Content-Type: application/json" --data @/tmp/pin.json
           echo ""
-          sleep 3
-          echo "read-back verification ..."
-          curl -sf -m 20 "https://ghost.eon-sovereign.workers.dev/memory?token=${GHOST_TOKEN}" > /tmp/ghost_mem.json
-          python3 -c "import json,sys;mem=json.load(open('/tmp/ghost_mem.json'));needle=json.loads(open('/tmp/pin.json').read())['text'][:60];found=any(needle in str(e.get('text','')) for e in mem);print('READ-BACK:','FOUND' if found else 'NOT FOUND','| needle:',needle);sys.exit(0 if found else 1)"
-          echo "done"
+          echo "read-back verification (KV propagates up to ~90s) ..."
+          for i in $(seq 1 18); do
+            sleep 5
+            curl -sf -m 20 "https://ghost.eon-sovereign.workers.dev/memory?token=${GHOST_TOKEN}" > /tmp/ghost_mem.json || continue
+            if python3 -c "import json,sys;mem=json.load(open('/tmp/ghost_mem.json'));needle=json.loads(open('/tmp/pin.json').read())['text'][:60];found=any(needle in str(e.get('text','')) for e in mem);print('READ-BACK:',needle);sys.exit(0 if found else 1)"; then
+              echo "VERIFIED after ${i} tries"
+              echo "done"
+              exit 0
+            fi
+            echo "  attempt $i: not visible yet"
+          done
+          echo "FAILED: pin never visible after 90s"
+          exit 1
 
   heartbeat:
     if: github.event.schedule == '17 * * * *'
