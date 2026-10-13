@@ -66,17 +66,18 @@ jobs:
               MARKER="[gpu-lane $GDATE]"
               if curl -sf -m 20 "https://ghost.eon-sovereign.workers.dev/memory?token=${GHOST_TOKEN}" > /tmp/gm.json \
                  && ! grep -qF "$MARKER" /tmp/gm.json; then
-                python3 -c "
-                import json, datetime
-                m = json.load(open('/tmp/gpu.json'))['model']
-                td = m['training_date']
-                age = (datetime.date.today() - datetime.date.fromisoformat(td)).days
-                text = ('[gpu-lane %s] TRAINING NEEDED: Colab T4 adapter from %s (%dd old, harness %s). '
-                        'Data auto-prepared (gdrive:Eon/agi-backup/distill_data.jsonl; notebook gdrive:Eon/models/eon_colab_v4_final.ipynb). '
-                        'Run: open notebook in colab.research.google.com, GPU T4, Run all.') % (datetime.date.today().isoformat(), td, age, m.get('harness_score','?'))
-                json.dump({'text': text, 'pin': True}, open('/tmp/gpin.json','w'))
-                print('pin text:', text[:110])"
-                curl -sf -m 20 -X POST "https://ghost.eon-sovereign.workers.dev/memory?token=${GHOST_TOKEN}" -H "Content-Type: application/json" --data @/tmp/gpin.json && echo "" || echo "ghost pin FAILED"
+                python3 - <<'PY'
+          import json, datetime
+          m = json.load(open('/tmp/gpu.json'))['model']
+          td = m['training_date']
+          age = (datetime.date.today() - datetime.date.fromisoformat(td)).days
+          text = ('[gpu-lane %s] TRAINING NEEDED: Colab T4 adapter from %s (%dd old, harness %s). '
+                  'Data auto-prepared (gdrive:Eon/agi-backup/distill_data.jsonl; notebook gdrive:Eon/models/eon_colab_v4_final.ipynb). '
+                  'Run: open notebook in colab.research.google.com, GPU T4, Run all.') % (datetime.date.today().isoformat(), td, age, m.get('harness_score','?'))
+          json.dump({'text': text, 'pin': True}, open('/tmp/gpin.json','w'))
+          print('pin text:', text[:110])
+          PY
+          curl -sf -m 20 -X POST "https://ghost.eon-sovereign.workers.dev/memory?token=${GHOST_TOKEN}" -H "Content-Type: application/json" --data @/tmp/gpin.json && echo "" || echo "ghost pin FAILED"
               else
                 echo "gpu-lane: already announced today, skip"
               fi
