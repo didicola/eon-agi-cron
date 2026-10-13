@@ -1,3 +1,24 @@
-{"tasks":[
-  {"id":"t1","text":"Reply with exactly: CLOUD-DISPATCH-OK","status":"done","ok":true,"reply":"CLOUD-DISPATCH-OK","elapsed":9.8,"ts":"2026-10-13T00:18:30Z","completed":"2026-10-13T00:23:25Z","from":"eon-orchestrator"}
-]}
+{
+    "tasks": [
+        {
+            "id": "t1",
+            "text": "Reply with exactly: CLOUD-DISPATCH-OK",
+            "status": "done",
+            "ok": true,
+            "reply": "CLOUD-DISPATCH-OK",
+            "elapsed": 9.8,
+            "ts": "2026-10-13T00:18:30Z",
+            "completed": "2026-10-13T00:23:25Z",
+            "from": "eon-orchestrator"
+        },
+        {
+            "id": "hmv61flf43s",
+            "text": "What is the reverse of the word 'world'?",
+            "status": "pending",
+            "domain": "string",
+            "ts": "2026-10-13T02:04:26.800Z",
+            "from": "do-alarm",
+            "note": "mirrored from eon-agi cloud DO ledger"
+        }
+    ]
+}
