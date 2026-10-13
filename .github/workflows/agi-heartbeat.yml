@@ -13,6 +13,8 @@ jobs:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    env:
+      GHOST_TOKEN: ${{ secrets.GHOST_TOKEN }}
     steps:
       - name: Cloud watchdog — verify brain alive, drain ledger, self-heal if stale
         run: |
@@ -52,6 +54,44 @@ jobs:
           # 3) drain horus ledger (no-op when empty; keeps 24/7 execution guaranteed)
           curl -sf -m 30 -X POST "https://eon-agi.eon-sovereign.workers.dev/horus/drain" || true
           echo ""
+
+          # 3b) GPU training lane — cloud-side staleness check (Colab T4 adapter)
+          # adapter age >= 2 days -> pin "TRAINING NEEDED" to ghost ONCE per day (dedup by date marker)
+          curl -sf -m 20 "https://gpu-inference.eon-sovereign.workers.dev/health" > /tmp/gpu.json || true
+          if [ -s /tmp/gpu.json ]; then
+            python3 - <<'PY'
+          import json, os, datetime, urllib.request
+          try:
+              g = json.load(open('/tmp/gpu.json'))
+              m = g.get('model', {})
+              td = m.get('training_date', '')
+              age = (datetime.date.today() - datetime.date.fromisoformat(td)).days
+              stale = age >= 2
+              print(f"gpu-lane: adapter {td} ({age}d) harness {m.get('harness_score','?')} traces {m.get('traces_used','?')} -> {'STALE' if stale else 'fresh'}")
+              if stale and os.environ.get('GHOST_TOKEN'):
+                  marker = f"[gpu-lane {datetime.date.today().isoformat()}]"
+                  req = urllib.request.Request(
+                      f"https://ghost.eon-sovereign.workers.dev/memory?token={os.environ['GHOST_TOKEN']}")
+                  mem = json.loads(urllib.request.urlopen(req, timeout=20).read())
+                  if any(marker in str(e.get('text', '')) for e in mem):
+                      print("gpu-lane: already announced today, skip")
+                  else:
+                      text = (f"{marker} TRAINING NEEDED: Colab T4 adapter from {td} "
+                              f"({age}d old, harness {m.get('harness_score','?')}). "
+                              "Data auto-prepared (gdrive:Eon/agi-backup/distill_data.jsonl, script+notebook gdrive:Eon/models/eon_colab_v4_final.ipynb). "
+                              "Run: open notebook in colab.research.google.com, GPU T4, Run all.")
+                      req = urllib.request.Request(
+                          f"https://ghost.eon-sovereign.workers.dev/memory?token={os.environ['GHOST_TOKEN']}",
+                          data=json.dumps({'text': text, 'pin': True}).encode(),
+                          headers={'Content-Type': 'application/json'}, method='POST')
+                      out = json.loads(urllib.request.urlopen(req, timeout=20).read())
+                      print("ghost pin:", json.dumps(out)[:120])
+          except Exception as e:
+              print("gpu-lane check failed:", e)
+          PY
+          else
+            echo "gpu-lane: unreachable"
+          fi
 
           # 4) ledger summary for the log
           curl -sf -m 20 "https://eon-agi.eon-sovereign.workers.dev/horus/ledger" | python3 -c "import json,sys;d=json.load(sys.stdin);print('horus: pending',d['pending'],'done',d['meta']['done'],'fail',d['meta']['fail'])" || true
