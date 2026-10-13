@@ -1,3 +1,3 @@
 {"tasks":[
-  {"id":"t1","text":"Reply with exactly: CLOUD-DISPATCH-OK","status":"pending","ts":"2026-10-13T00:18:30Z","from":"eon-orchestrator"}
+  {"id":"t1","text":"Reply with exactly: CLOUD-DISPATCH-OK","status":"done","ok":true,"reply":"CLOUD-DISPATCH-OK","elapsed":9.8,"ts":"2026-10-13T00:18:30Z","completed":"2026-10-13T00:23:25Z","from":"eon-orchestrator"}
 ]}
