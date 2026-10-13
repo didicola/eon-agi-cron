@@ -2,24 +2,60 @@ name: eon-agi-heartbeat
 
 on:
   schedule:
-    - cron: '4-59/10 * * * *'
-    - cron: '17 * * * *'
+    - cron: '4-59/10 * * * *'   # 6x/hour watchdog (GH may delay up to ~15min under load)
+    - cron: '17 * * * *'        # hourly goal author + heartbeat commit
   workflow_dispatch:
 
 jobs:
   tick:
-    if: github.event.schedule == '*/10 * * * *' || github.event_name == 'workflow_dispatch'
+    # FIX (2026-10-13): old if compared '*/10 * * * *' against actual event string
+    # '4-59/10 * * * *' -> never matched -> tick NEVER ran on schedule. Gate on event_name.
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Trigger cloud AGI self-improvement cycles
+      - name: Cloud watchdog — verify brain alive, drain ledger, self-heal if stale
         run: |
-          echo "[$(date -u +%FT%TZ)] firing eon-agi /run-cron ..."
-          curl -sf -m 40 -X POST "https://eon-agi.eon-sovereign.workers.dev/run-cron" \
-            -H "Content-Type: application/json"
+          set -e
+          echo "[$(date -u +%FT%TZ)] watchdog tick"
+
+          # 1) health probe (retry 3x)
+          OK=0
+          for i in 1 2 3; do
+            if curl -sf -m 30 "https://eon-agi.eon-sovereign.workers.dev/health" > /tmp/health.json; then OK=1; break; fi
+            echo "  health try $i failed"; sleep 5
+          done
+          if [ "$OK" != "1" ]; then echo "CRITICAL: eon-agi unreachable after 3 tries"; exit 1; fi
+          cat /tmp/health.json; echo ""
+
+          # 2) staleness check — DO alarm should run every 10 min; >25min stale = alarm broken
+          if ! python3 - <<'PY'
+          import json, sys, datetime
+          h = json.load(open('/tmp/health.json'))
+          lr = h.get('last_run', '')
+          if not lr:
+              print("no last_run -> STALE"); sys.exit(1)
+          try:
+              age = (datetime.datetime.now(datetime.timezone.utc) -
+                     datetime.datetime.fromisoformat(lr.replace('Z', '+00:00'))).total_seconds()
+              print(f"last_run age: {int(age)}s -> {'STALE' if age > 1500 else 'fresh'}")
+              sys.exit(1 if age > 1500 else 0)
+          except Exception as e:
+              print(f"parse fail {e} -> assume STALE"); sys.exit(1)
+          PY
+          then
+            echo "ALARM STALE — self-heal: POST /run-cron to kick cycles + rearm"
+            curl -sf -m 60 -X POST "https://eon-agi.eon-sovereign.workers.dev/run-cron" -H "Content-Type: application/json" || true
+            echo ""
+          fi
+
+          # 3) drain horus ledger (no-op when empty; keeps 24/7 execution guaranteed)
+          curl -sf -m 30 -X POST "https://eon-agi.eon-sovereign.workers.dev/horus/drain" || true
           echo ""
-          curl -sf -m 20 "https://eon-agi.eon-sovereign.workers.dev/health"
-          echo ""
+
+          # 4) ledger summary for the log
+          curl -sf -m 20 "https://eon-agi.eon-sovereign.workers.dev/horus/ledger" | python3 -c "import json,sys;d=json.load(sys.stdin);print('horus: pending',d['pending'],'done',d['meta']['done'],'fail',d['meta']['fail'])" || true
+          echo "tick ok"
 
   goal:
     if: github.event.schedule == '17 * * * *' || github.event_name == 'workflow_dispatch'
@@ -72,12 +108,12 @@ jobs:
           exit 1
 
   heartbeat:
-    if: github.event.schedule == '17 * * * *'
+    if: github.event.schedule == '17 * * * *' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - name: Hourly heartbeat (keeps cron alive)
+      - name: Hourly heartbeat (keeps cron alive — GH disables schedule after 60d no-commit)
         run: |
           mkdir -p hb; date -u +%FT%TZ > hb/last_beat.txt
           git config user.name "eon-agi-cron"; git config user.email "cron@eon.local"
@@ -85,4 +121,9 @@ jobs:
           git diff --cached --quiet || git commit -m "heartbeat: $(date -u +%FT%TZ)"
           git push || true
 
-# schedule registered: 2026-10-12 — eon-agi cloud learning heartbeat
+# reverse-engineered + fixed 2026-10-13:
+#   - tick if-gate string mismatch (never fired) -> event_name gate
+#   - tick = watchdog (staleness>25min -> /run-cron self-heal) not blind cycle driver
+#     (DO alarm owns 10-min cycles; blind /run-cron would blow KV ~1000 puts/day)
+#   - horus drain step: cloud 24/7 execution redundancy
+#   - heartbeat now also on dispatch (repo activity keeps GH cron registered)
