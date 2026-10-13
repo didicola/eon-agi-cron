@@ -57,38 +57,32 @@ jobs:
 
           # 3b) GPU training lane — cloud-side staleness check (Colab T4 adapter)
           # adapter age >= 2 days -> pin "TRAINING NEEDED" to ghost ONCE per day (dedup by date marker)
+          # NOTE: ghost rejects urllib (403 on Python UA) — use curl like the goal job
           curl -sf -m 20 "https://gpu-inference.eon-sovereign.workers.dev/health" > /tmp/gpu.json || true
           if [ -s /tmp/gpu.json ]; then
-            python3 - <<'PY'
-          import json, os, datetime, urllib.request
-          try:
-              g = json.load(open('/tmp/gpu.json'))
-              m = g.get('model', {})
-              td = m.get('training_date', '')
-              age = (datetime.date.today() - datetime.date.fromisoformat(td)).days
-              stale = age >= 2
-              print(f"gpu-lane: adapter {td} ({age}d) harness {m.get('harness_score','?')} traces {m.get('traces_used','?')} -> {'STALE' if stale else 'fresh'}")
-              if stale and os.environ.get('GHOST_TOKEN'):
-                  marker = f"[gpu-lane {datetime.date.today().isoformat()}]"
-                  req = urllib.request.Request(
-                      f"https://ghost.eon-sovereign.workers.dev/memory?token={os.environ['GHOST_TOKEN']}")
-                  mem = json.loads(urllib.request.urlopen(req, timeout=20).read())
-                  if any(marker in str(e.get('text', '')) for e in mem):
-                      print("gpu-lane: already announced today, skip")
-                  else:
-                      text = (f"{marker} TRAINING NEEDED: Colab T4 adapter from {td} "
-                              f"({age}d old, harness {m.get('harness_score','?')}). "
-                              "Data auto-prepared (gdrive:Eon/agi-backup/distill_data.jsonl, script+notebook gdrive:Eon/models/eon_colab_v4_final.ipynb). "
-                              "Run: open notebook in colab.research.google.com, GPU T4, Run all.")
-                      req = urllib.request.Request(
-                          f"https://ghost.eon-sovereign.workers.dev/memory?token={os.environ['GHOST_TOKEN']}",
-                          data=json.dumps({'text': text, 'pin': True}).encode(),
-                          headers={'Content-Type': 'application/json'}, method='POST')
-                      out = json.loads(urllib.request.urlopen(req, timeout=20).read())
-                      print("ghost pin:", json.dumps(out)[:120])
-          except Exception as e:
-              print("gpu-lane check failed:", e)
-          PY
+            if AGE=$(python3 -c "import json,datetime,sys; td=json.load(open('/tmp/gpu.json'))['model']['training_date']; age=(datetime.date.today()-datetime.date.fromisoformat(td)).days; print(age); sys.exit(0 if age>=2 else 1)"); then
+              echo "gpu-lane: adapter $(python3 -c "import json; m=json.load(open('/tmp/gpu.json'))['model']; print(m['training_date'], m.get('harness_score','?'), m.get('traces_used','?'))") age=${AGE}d -> STALE"
+              GDATE=$(date -u +%F)
+              MARKER="[gpu-lane $GDATE]"
+              if curl -sf -m 20 "https://ghost.eon-sovereign.workers.dev/memory?token=${GHOST_TOKEN}" > /tmp/gm.json \
+                 && ! grep -qF "$MARKER" /tmp/gm.json; then
+                python3 -c "
+                import json, datetime
+                m = json.load(open('/tmp/gpu.json'))['model']
+                td = m['training_date']
+                age = (datetime.date.today() - datetime.date.fromisoformat(td)).days
+                text = ('[gpu-lane %s] TRAINING NEEDED: Colab T4 adapter from %s (%dd old, harness %s). '
+                        'Data auto-prepared (gdrive:Eon/agi-backup/distill_data.jsonl; notebook gdrive:Eon/models/eon_colab_v4_final.ipynb). '
+                        'Run: open notebook in colab.research.google.com, GPU T4, Run all.') % (datetime.date.today().isoformat(), td, age, m.get('harness_score','?'))
+                json.dump({'text': text, 'pin': True}, open('/tmp/gpin.json','w'))
+                print('pin text:', text[:110])"
+                curl -sf -m 20 -X POST "https://ghost.eon-sovereign.workers.dev/memory?token=${GHOST_TOKEN}" -H "Content-Type: application/json" --data @/tmp/gpin.json && echo "" || echo "ghost pin FAILED"
+              else
+                echo "gpu-lane: already announced today, skip"
+              fi
+            else
+              echo "gpu-lane: adapter fresh (${AGE}d)"
+            fi
           else
             echo "gpu-lane: unreachable"
           fi
