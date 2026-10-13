@@ -2,6 +2,7 @@ name: eon-agi-heartbeat
 
 on:
   schedule:
+    - cron: '* * * * *'         # TEMP: schedule-fire proof (removed after test)
     - cron: '4-59/10 * * * *'   # 6x/hour watchdog (GH may delay up to ~15min under load)
     - cron: '17 * * * *'        # hourly goal author + heartbeat commit
   workflow_dispatch:
