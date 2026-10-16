@@ -1,0 +1,65 @@
+name: lora-cpu-trainer
+
+# EON Phase C — standing owner mandate 2026-10-16 (EON ONE):
+# unattended cloud learning lane; runs with zero local hosts.
+# Receipts: runs/lora-cpu/*.json committed + artifact lora-adapter (90d).
+on:
+  schedule:
+    - cron: '3 3 * * *'   # daily ~03:03Z (GH scheduler drift documented)
+  workflow_dispatch:
+    inputs:
+      traces: { description: 'random slice size', default: '400', required: false }
+      seed: { description: '0 = time-derived seed', default: '0', required: false }
+
+concurrency:
+  group: lora-cpu
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    env:
+      EON_TRAIN_TRACES: ${{ github.event.inputs.traces || '400' }}
+      EON_TRAIN_SEED: ${{ github.event.inputs.seed || '0' }}
+      GHOST_TOKEN: ${{ secrets.GHOST_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: install CPU lane
+        run: |
+          pip install -q --upgrade pip
+          pip install -q torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -q transformers peft datasets accelerate
+      - name: train
+        run: python trainer/train_lora_cpu.py --data distill_data.jsonl
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lora-adapter
+          path: adapter_out/
+          if-no-files-found: error
+      - name: commit receipt
+        run: |
+          git config user.name "eon-trainer-gh"
+          git config user.email "eon-trainer-gh@users.noreply.github.com"
+          mkdir -p runs/lora-cpu
+          TR=$(date -u +%Y%m%dT%H%M%SZ)
+          cp train_report.json "runs/lora-cpu/${TR}.json"
+          git add "runs/lora-cpu/${TR}.json" train_report.json
+          git commit -q -m "lora-cpu receipt ${TR}" && echo "receipt committed" || echo "nothing to commit"
+          git push -q && echo pushed || echo "push failed"
+      - name: pin receipt to ghost (runs once owner sets GHOST_TOKEN secret)
+        if: env.GHOST_TOKEN != ''
+        run: |
+          TS=$(date -u +%FT%TZ)
+          RT=$(python3 -c "import json;print(json.load(open('train_report.json')).get('runtime_sec'))")
+          ST=$(python3 -c "import json;r=json.load(open('train_report.json'));print(r.get('train',{}).get('steps'))")
+          curl -sf -m 20 -X POST "https://ghost.eon-sovereign.workers.dev/memory?token=${GHOST_TOKEN}" \
+            -H "Content-Type: application/json" -H "User-Agent: curl/8.5.0" \
+            -d "{\"ts\":\"${TS}\",\"pin\":true,\"text\":\"[lora-cpu] receipt committed; steps=${ST} runtime=${RT}s; artifact=lora-adapter; runs/lora-cpu/\"}" \
+            && echo PINNED || echo "ghost pin failed (durable receipt already committed)"
