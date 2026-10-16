@@ -43,6 +43,16 @@ def main():
     started = datetime.datetime.now(datetime.timezone.utc).isoformat()
     rows = [json.loads(l) for l in open(a.data, encoding="utf-8") if l.strip()]
     total = len(rows)
+    # v1.1: corpus is heterogeneous (6 shapes). Normalize keys + census.
+    PKEYS = ("prompt", "input")
+    CKEYS = ("completion", "output")
+    def usable(r):
+        return bool(next((r[k] for k in PKEYS if r.get(k)), None)) and                bool(next((r[k] for k in CKEYS if r.get(k)), None))
+    stray = [r for r in rows if not usable(r)]
+    skipped_toolong = 0
+    rows = [r for r in rows if usable(r)]
+    print(f"[census] corpus={total} usable={len(rows)} unusable(no prompt/completion)={len(stray)}", flush=True)
+    total = len(rows)
     seed = a.seed or int(datetime.datetime.now(datetime.timezone.utc)
                          .strftime("%y%m%d%H"))
     rng = np.random.RandomState(seed)
@@ -64,8 +74,10 @@ def main():
           f"threads={torch.get_num_threads()}", flush=True)
 
     def enc(r):
-        pid = tok(r["prompt"], add_special_tokens=False)["input_ids"]
-        cid = tok(r["completion"], truncation=True, max_length=a.maxlen,
+        ptxt = next((r[k] for k in PKEYS if r.get(k)), None)
+        ctxt = next((r[k] for k in CKEYS if r.get(k)), None)
+        pid = tok(ptxt, add_special_tokens=False)["input_ids"]
+        cid = tok(ctxt, truncation=True, max_length=a.maxlen,
                   add_special_tokens=False)["input_ids"]
         ids = (pid + cid)[:a.maxlen]
         labels = ([-100] * min(len(pid), a.maxlen) +
@@ -127,7 +139,7 @@ def main():
         "model": MODEL,
         "adapter": {"out": a.out, "r": 16, "alpha": 32,
                     "target_modules": 7, "trainable_params": trainable},
-        "data": {"file": a.data, "corpus": total, "sampled": len(rows),
+        "data": {"file": a.data, "corpus": total, "usable_rows": len(rows), "unusable_rows": len(stray), "sampled": len(rows),
                  "seed": seed, "ts": started},
         "train": {"epochs": a.epochs, "batch": a.batch, "lr": a.lr,
                   "maxlen": a.maxlen, "steps": step},
