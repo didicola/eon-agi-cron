@@ -16,6 +16,14 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import LoraConfig, get_peft_model
 
 MODEL = os.environ.get("EON_TRAIN_MODEL", "Qwen/Qwen2.5-0.5B-Instruct")
+# v1.3 root-cause fix (run 38963798072: threads=2, ~209 s/step -> 75min cancel):
+# explicit thread count + hard time-budget guard so a receipt ALWAYS lands.
+import os as _os
+_nt = int(_os.environ.get("OMP_NUM_THREADS", "0")) or (_os.cpu_count() or 2)
+try:
+    torch.set_num_threads(_nt)
+except Exception:
+    pass
 TARGET_MODULES = ["q_proj", "k_proj", "v_proj", "o_proj",
                   "gate_proj", "up_proj", "down_proj"]
 
@@ -36,7 +44,9 @@ def main():
     ap.add_argument("--batch", type=int,
                     default=int(os.environ.get("EON_TRAIN_BATCH", "2")))
     ap.add_argument("--maxlen", type=int,
-                    default=int(os.environ.get("EON_TRAIN_MAXLEN", "256")))
+                    default=int(os.environ.get("EON_TRAIN_MAXLEN", "160")))
+    ap.add_argument("--max-seconds", type=int,
+                    default=int(os.environ.get("EON_TRAIN_MAX_SECONDS", "2100")))
     a = ap.parse_args()
 
     t0 = time.time()
@@ -58,6 +68,8 @@ def main():
     rng = np.random.RandomState(seed)
     idx = rng.choice(total, size=min(a.traces, total), replace=False)
     rows = [rows[int(i)] for i in sorted(idx)]
+    rows.sort(key=lambda r: len(str(r.get("prompt") or r.get("input") or "")) +
+                            len(str(r.get("completion") or r.get("output") or "")))
     print(f"[data] corpus={total} sampled={len(rows)} seed={seed}", flush=True)
 
     tok = AutoTokenizer.from_pretrained(MODEL)
@@ -107,10 +119,18 @@ def main():
     order = np.arange(n)
     step = 0
     losses = []
+    cut = False
     log_every = max(1, (n // a.batch) // 8)
     for ep in range(a.epochs):
+        if cut:
+            break
         rng.shuffle(order)
         for s in range(0, n - a.batch + 1, a.batch):
+            if time.time() - t0 > a.max_seconds:
+                cut = True
+                print(f"[cut] time budget {a.max_seconds}s reached at step {step} "
+                      f"(pace {(time.time()-t0)/max(step,1):.1f} s/step) — saving receipts", flush=True)
+                break
             sel = [rows[int(i)] for i in order[s:s + a.batch]]
             input_ids, labels, att = batch(sel)
             out = model(input_ids=input_ids, attention_mask=att,
@@ -124,6 +144,8 @@ def main():
             step += 1
             v = float(loss.detach())
             losses.append(v)
+            if step == 3:
+                print(f"[pace] {((time.time()-t0)/3):.1f} s/step (threads={torch.get_num_threads()})", flush=True)
             if step % log_every == 0:
                 m = sum(losses[-log_every:]) / min(log_every, len(losses[-log_every:]))
                 print(f"[step {step}] loss={v:.4f} avg={m:.4f}", flush=True)
@@ -147,6 +169,8 @@ def main():
                  "first5": [round(x, 4) for x in losses[:5]],
                  "last5": [round(x, 4) for x in losses[-5:]]},
         "runtime_sec": round(time.time() - t0, 1),
+        "cut_by_budget": cut,
+        "threads": torch.get_num_threads(),
         "machine": platform.machine(),
     }
     json.dump(report, open(a.report, "w"), indent=1)
