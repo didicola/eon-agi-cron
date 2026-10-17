@@ -1,0 +1,24 @@
+{
+ "ts": "2026-10-17T08:37:24.890586+00:00",
+ "robot": "strings-robot/neural-matrix (Phase C corpus QC)",
+ "src": "distill_data.jsonl",
+ "rows_in": 6166,
+ "rows_normalized": 6166,
+ "bad_json": 0,
+ "unusable_by_shape": {},
+ "shapes": {
+  "answer,completion,id,prompt,q,source,teacher,ts": 4813,
+  "answer,completion,prompt,q,teacher,ts": 971,
+  "answer,completion,id,prompt,q,repo,source,teacher,ts": 161,
+  "answer,completion,id,prompt,q,source,teacher,topic,ts": 144,
+  "id,input,output,source,teacher,topic,ts": 59,
+  "id,input,output,score,source,tag,ts": 18
+ },
+ "len_chars": {
+  "p50": 202,
+  "p90": 539,
+  "p99": 870,
+  "max": 1229
+ },
+ "contract": "every emitted row: {prompt:str>=1, completion:str>=1}"
+}

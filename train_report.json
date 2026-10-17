@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-17T07:31:59.423635+00:00",
+ "ts": "2026-10-17T09:16:38.897879+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "model": "Qwen/Qwen2.5-0.5B-Instruct",
@@ -13,38 +13,42 @@
  "data": {
   "file": "distill_norm.jsonl",
   "corpus": 6166,
-  "usable_rows": 140,
+  "usable_rows": 126,
   "unusable_rows": 0,
-  "sampled": 140,
-  "seed": 26101707,
-  "ts": "2026-10-17T07:30:13.937535+00:00"
+  "sampled": 126,
+  "seed": 171017,
+  "ts": "2026-10-17T08:37:30.035389+00:00"
  },
  "train": {
   "epochs": 1,
   "batch": 2,
   "lr": 0.0002,
   "maxlen": 160,
-  "steps": 70
+  "steps": 15
  },
  "loss": {
-  "mean_last": 0.7529,
+  "mean_last": 0.7598,
   "first5": [
-   1.4288,
-   1.3341,
-   0.7009,
-   1.4737,
-   1.9161
+   1.5761,
+   1.2525,
+   0.9256,
+   0.3585,
+   0.9251
   ],
   "last5": [
-   0.9531,
-   0.039,
-   0.0516,
-   0.1445,
-   0.066
-  ]
+   1.5211,
+   0.0125,
+   0.1589,
+   0.0624,
+   0.3512
+  ],
+  "heldout_base": 1.4907,
+  "heldout_after": 1.4185,
+  "heldout_delta": -0.0722,
+  "heldout_n": 14
  },
- "runtime_sec": 105.5,
- "cut_by_budget": false,
+ "runtime_sec": 2348.9,
+ "cut_by_budget": true,
  "threads": 4,
  "machine": "x86_64"
 }
