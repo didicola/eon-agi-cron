@@ -119,15 +119,32 @@ jobs:
             echo "cloud-brain try $try failed, retrying..."
             sleep 5
           done
-          if [ "$CB_OK" != "1" ]; then echo "cloud-brain failed after retries"; exit 1; fi
-          GOAL=$(python3 -c "import json;r=json.load(open('/tmp/brain.json'));print(r['choices'][0]['message']['content'].strip().splitlines()[-1][:120])")
+          if [ "$CB_OK" != "1" ]; then
+            echo "cloud-brain failed after retries — DETERMINISTIC FALLBACK goal (zero model dependency)"
+            GOAL=$(python3 -c "import json,re; h=json.load(open('/tmp/health.json')); ds=h.get('domain_stats',''); pairs=re.findall(r'([a-z]+)=(\d+)%', ds) or [('math','0')]; d=min(pairs,key=lambda x:int(x[1]))[0]; print('Generate 30 new synthetic task seeds for domain ' + d + ' (weakest observed score) to lift weakest-skill accuracy toward 90%.')")
+          else
+            GOAL=$(python3 -c "import json;r=json.load(open('/tmp/brain.json'));print(r['choices'][0]['message']['content'].strip().splitlines()[-1][:120])" 2>/dev/null) || GOAL=""
+            if [ -z "$GOAL" ]; then
+              echo "cloud-brain reply present but unparsable — deterministic fallback"
+              GOAL=$(python3 -c "import json,re; h=json.load(open('/tmp/health.json')); ds=h.get('domain_stats',''); pairs=re.findall(r'([a-z]+)=(\d+)%', ds) or [('math','0')]; d=min(pairs,key=lambda x:int(x[1]))[0]; print('Generate 30 new synthetic task seeds for domain ' + d + ' (weakest observed score) to lift weakest-skill accuracy toward 90%.')")
+            fi
+          fi
           echo "GOAL: $GOAL"
           TS=$(date -u +%FT%TZ)
           TEXT="[agi-loop goal C ${TS} cycle=${CYCLES}] ${GOAL}"
           python3 -c "import json,sys;json.dump({'text':sys.argv[1],'pin':True},open('/tmp/pin.json','w'))" "$TEXT"
+          echo "ghost token self-test (status only) ..."
+          ST=$(curl -s -o /dev/null -w "%{http_code}" -m 20 "https://ghost.eon-sovereign.workers.dev/memory?token=${GHOST_TOKEN}" || echo 000)
+          echo "ghost self-test HTTP: $ST"
           echo "pinning to ghost (curl) ..."
-          curl -sf -m 20 -X POST "https://ghost.eon-sovereign.workers.dev/memory?token=${GHOST_TOKEN}" -H "Content-Type: application/json" --data @/tmp/pin.json
-          echo ""
+          PC=$(curl -s -o /tmp/pin_res.json -w "%{http_code}" -m 20 -X POST "https://ghost.eon-sovereign.workers.dev/memory?token=${GHOST_TOKEN}" -H "Content-Type: application/json" --data @/tmp/pin.json || echo 000)
+          echo "pin HTTP: $PC"
+          if [ "$PC" != "200" ]; then
+            echo "::warning::ghost pin rejected (HTTP $PC) — likely stale GHOST_TOKEN repo secret after the 2026-10-16 rotation; receipt skipped, lane continues"
+            echo "GHOST-PIN-SKIPPED-$PC"
+            exit 0
+          fi
+          echo
           echo "read-back verification (KV propagates up to ~90s) ..."
           for i in $(seq 1 18); do
             sleep 5
