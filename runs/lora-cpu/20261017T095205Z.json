@@ -1,0 +1,102 @@
+{
+ "ts": "2026-10-17T09:52:02.466173+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26101709,
+  "ts": "2026-10-17T09:50:03.200934+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26101709
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 63
+ },
+ "loss": {
+  "mean_last": 1.663,
+  "first5": [
+   2.1785,
+   2.016,
+   2.1815,
+   2.4146,
+   1.8068
+  ],
+  "last5": [
+   2.0239,
+   1.2169,
+   1.3598,
+   1.027,
+   1.7054
+  ],
+  "heldout_base": 2.081,
+  "heldout_after": 1.6539,
+  "heldout_delta": -0.4271,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 0.16,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.146
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.225
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What potential advantage do quantum computers have over classical computers i",
+    "exp": "ANSWER: Quantum computers have the potential to complete some calculations exponentially faster than",
+    "pred_before": " A: Quantum computers can perform calculations much faster than classical computers. The reason is t",
+    "pred_after": "ANSWER: Quantum computers can perform certain calculations much faster than classical computers, all"
+   },
+   {
+    "p": "Q: What is the main limitation of the email app mentioned in the headline, and w",
+    "exp": "ANSWER: The main limitation of the email app is that it only accepts emails from one sender per inbo",
+    "pred_before": " \nA: The main limitation of the email app mentioned in the headline is that it can only be used on a",
+    "pred_after": "ANSWER: The main limitation of the email app mentioned in the headline is that it lacks a user inter"
+   }
+  ]
+ },
+ "runtime_sec": 119.3,
+ "cut_by_budget": false,
+ "threads": 4,
+ "machine": "x86_64"
+}
