@@ -248,7 +248,7 @@ def main():
     if not gen_ok:
         gen_skipped = "runner-too-slow"
     elif (time.time() - t0) < a.max_seconds * 0.25:
-        before_gen = gen_eval_pass(model, gen_samples,
+        before_gen = gen_eval_pass(gen_samples,
                                    time.time() + GEN_PASS_MAX, "before")
         print(f"[gen-before] {len(before_gen)}/{len(gen_samples)} decoded", flush=True)
 
@@ -299,7 +299,7 @@ def main():
 
     after_gen = []
     if gen_ok:
-        after_gen = gen_eval_pass(model, gen_samples,
+        after_gen = gen_eval_pass(gen_samples,
                                   time.time() + GEN_PASS_MAX, "after")
         print(f"[gen-after] {len(after_gen)}/{len(gen_samples)} decoded", flush=True)
 
