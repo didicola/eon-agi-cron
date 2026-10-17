@@ -70,6 +70,11 @@ def main():
     rows = [rows[int(i)] for i in sorted(idx)]
     rows.sort(key=lambda r: len(str(r.get("prompt") or r.get("input") or "")) +
                             len(str(r.get("completion") or r.get("output") or "")))
+    # v1.4: heldout split — base-vs-adapter signal in every receipt
+    n_held = max(4, len(rows) // 10)
+    held = rows[-n_held:]
+    rows = rows[:-n_held]
+    print(f"[split] train={len(rows)} heldout={len(held)}", flush=True)
     print(f"[data] corpus={total} sampled={len(rows)} seed={seed}", flush=True)
 
     tok = AutoTokenizer.from_pretrained(MODEL)
@@ -100,6 +105,16 @@ def main():
             labels += [-100] * (len(ids) - len(labels))
         return ids, labels
 
+    def eval_loss(rows_eval):
+        model.eval()
+        tot = 0.0
+        with torch.no_grad():
+            for s in range(0, len(rows_eval), a.batch):
+                ii, ll, aa = batch(rows_eval[s:s + a.batch])
+                tot += float(model(input_ids=ii, attention_mask=aa, labels=ll).loss)
+        model.train()
+        return round(tot / max(1, (len(rows_eval) + a.batch - 1) // a.batch), 4)
+
     def batch(bs_rows):
         items = [enc(r) for r in bs_rows]
         L = max(len(i[0]) for i in items)
@@ -113,6 +128,8 @@ def main():
             att[n, :len(ids)] = 1
         return input_ids, labels, att
 
+    base_held = eval_loss(held)
+    print(f"[heldout] base loss={base_held}", flush=True)
     opt = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad],
                             lr=a.lr)
     n = len(rows)
@@ -150,6 +167,8 @@ def main():
                 m = sum(losses[-log_every:]) / min(log_every, len(losses[-log_every:]))
                 print(f"[step {step}] loss={v:.4f} avg={m:.4f}", flush=True)
 
+    after_held = eval_loss(held)
+    print(f"[heldout] after-adapter loss={after_held} (delta={round(after_held - base_held, 4)})", flush=True)
     model.save_pretrained(a.out, safe_serialization=True)
     tok.save_pretrained(a.out)
 
@@ -167,7 +186,10 @@ def main():
                   "maxlen": a.maxlen, "steps": step},
         "loss": {"mean_last": round(mean_loss, 4) if mean_loss else None,
                  "first5": [round(x, 4) for x in losses[:5]],
-                 "last5": [round(x, 4) for x in losses[-5:]]},
+                 "last5": [round(x, 4) for x in losses[-5:]],
+                 "heldout_base": base_held, "heldout_after": after_held,
+                 "heldout_delta": round(after_held - base_held, 4),
+                 "heldout_n": len(held)},
         "runtime_sec": round(time.time() - t0, 1),
         "cut_by_budget": cut,
         "threads": torch.get_num_threads(),
