@@ -1,0 +1,102 @@
+{
+ "ts": "2026-10-18T08:21:32.404529+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26101807,
+  "ts": "2026-10-18T07:45:26.184673+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26101807
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 11
+ },
+ "loss": {
+  "mean_last": 2.0385,
+  "first5": [
+   2.3444,
+   3.114,
+   1.4601,
+   2.253,
+   2.2736
+  ],
+  "last5": [
+   1.9687,
+   2.3268,
+   2.2155,
+   1.7102,
+   1.0795
+  ],
+  "heldout_base": 2.1485,
+  "heldout_after": 1.7282,
+  "heldout_delta": -0.4203,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 0.74,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.103
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.153
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What technology allows for the rapid transcription of audio, enabling an hour",
+    "exp": "ANSWER: The technology that enables rapid transcription of audio is Automatic Speech Recognition (AS",
+    "pred_before": "   A:\nAnswer:\n\nThe technology that allows for the rapid transcription of audio is called \"audio edit",
+    "pred_after": "ANSWER: The technology that allows for the rapid transcription of audio is called \"text-to-speech,\" "
+   },
+   {
+    "p": "Q: What role can technology, such as artificial intelligence and data analytics,",
+    "exp": "ANSWER: Technology can play a significant role in helping patients understand and navigate their can",
+    "pred_before": " \nA: Technology can help patients by providing them with a wealth of information about their conditi",
+    "pred_after": "ANSWER: Technology, including AI and data analytics, can significantly enhance the understanding and"
+   }
+  ]
+ },
+ "runtime_sec": 2166.2,
+ "cut_by_budget": true,
+ "threads": 4,
+ "machine": "x86_64"
+}
