@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-18T08:21:32.404529+00:00",
+ "ts": "2026-10-19T08:30:33.536689+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26101807,
-  "ts": "2026-10-18T07:45:26.184673+00:00"
+  "seed": 26101908,
+  "ts": "2026-10-19T08:27:25.297744+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,50 +29,50 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26101807
+  "seed": 26101908
  },
  "train": {
   "epochs": 1,
   "batch": 2,
   "lr": 0.0002,
   "maxlen": 160,
-  "steps": 11
+  "steps": 63
  },
  "loss": {
-  "mean_last": 2.0385,
+  "mean_last": 1.7821,
   "first5": [
-   2.3444,
-   3.114,
-   1.4601,
-   2.253,
-   2.2736
+   1.8421,
+   2.036,
+   1.7114,
+   1.6724,
+   1.4194
   ],
   "last5": [
-   1.9687,
-   2.3268,
-   2.2155,
-   1.7102,
-   1.0795
+   2.0799,
+   1.4736,
+   1.1902,
+   1.6049,
+   1.4196
   ],
-  "heldout_base": 2.1485,
-  "heldout_after": 1.7282,
-  "heldout_delta": -0.4203,
+  "heldout_base": 2.2171,
+  "heldout_after": 1.7106,
+  "heldout_delta": -0.5065,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 0.74,
+  "probe_sec": 0.18,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.103
+   "ratio_mean": 0.058
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.153
+   "ratio_mean": 0.15
   },
   "aligned": {
    "n": 8,
@@ -82,21 +82,21 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What technology allows for the rapid transcription of audio, enabling an hour",
-    "exp": "ANSWER: The technology that enables rapid transcription of audio is Automatic Speech Recognition (AS",
-    "pred_before": "   A:\nAnswer:\n\nThe technology that allows for the rapid transcription of audio is called \"audio edit",
-    "pred_after": "ANSWER: The technology that allows for the rapid transcription of audio is called \"text-to-speech,\" "
+    "p": "Q: What characteristics must a set of instructions have to be considered an algo",
+    "exp": "ANSWER: To be classified as an algorithm, a set of instructions must be well\u2011defined, meaning each s",
+    "pred_before": " An example would be the quicksort algorithm.\\nA: A set of instructions that is defined as a procedu",
+    "pred_after": "ANSWER: A set of instructions is considered an algorithm if it follows the following characteristics"
    },
    {
-    "p": "Q: What role can technology, such as artificial intelligence and data analytics,",
-    "exp": "ANSWER: Technology can play a significant role in helping patients understand and navigate their can",
-    "pred_before": " \nA: Technology can help patients by providing them with a wealth of information about their conditi",
-    "pred_after": "ANSWER: Technology, including AI and data analytics, can significantly enhance the understanding and"
+    "p": "Q: What is \u201clocal indexing\u201d in AI applications, and how does it help reduce the ",
+    "exp": "ANSWER: Local indexing refers to creating and maintaining a searchable, in\u2011memory (or on\u2011disk) data ",
+    "pred_before": " \nA: Local indexing refers to a technique that allows an AI application to use local knowledge or co",
+    "pred_after": "ANSWER: Local indexing refers to the process where a model\u2019s response is generated locally within th"
    }
   ]
  },
- "runtime_sec": 2166.2,
- "cut_by_budget": true,
+ "runtime_sec": 188.2,
+ "cut_by_budget": false,
  "threads": 4,
  "machine": "x86_64"
 }
