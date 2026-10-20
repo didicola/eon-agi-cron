@@ -1,0 +1,102 @@
+{
+ "ts": "2026-10-20T08:48:11.370954+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26102008,
+  "ts": "2026-10-20T08:10:09.840980+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26102008
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 9
+ },
+ "loss": {
+  "mean_last": 2.0707,
+  "first5": [
+   1.9599,
+   1.4896,
+   2.0411,
+   1.9798,
+   2.3162
+  ],
+  "last5": [
+   2.3162,
+   2.1064,
+   2.3289,
+   2.4064,
+   2.0084
+  ],
+  "heldout_base": 2.1524,
+  "heldout_after": 1.725,
+  "heldout_delta": -0.4274,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 1.14,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.157
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.205
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: How can technology, such as electronic health records and telemedicine, suppo",
+    "exp": "ANSWER: Technology can support individuals with cancer by providing access to personalized medical i",
+    "pred_before": " \nA: Electronic health records (EHRs) allow patients to access their medical information from anywhe",
+    "pred_after": "ANSWER: Technology like electronic health records (EHRs) and telemedicine can provide several benefi"
+   },
+   {
+    "p": "Q: What are GitHub Actions, how do they interact with Pull Requests and Issues, ",
+    "exp": "ANSWER: **GitHub Actions** is GitHub\u2019s built\u2011in CI/CD (continuous integration/continuous deployment)",
+    "pred_before": " \nA: GitHub Actions is a tool that automates the process of building and deploying software. It can ",
+    "pred_after": "ANSWER: GitHub Actions is a powerful tool that automates the process of building, testing, and deplo"
+   }
+  ]
+ },
+ "runtime_sec": 2281.5,
+ "cut_by_budget": true,
+ "threads": 4,
+ "machine": "x86_64"
+}
