@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-20T08:48:11.370954+00:00",
+ "ts": "2026-10-21T08:24:41.489113+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26102008,
-  "ts": "2026-10-20T08:10:09.840980+00:00"
+  "seed": 26102108,
+  "ts": "2026-10-21T08:15:22.833047+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,50 +29,50 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26102008
+  "seed": 26102108
  },
  "train": {
   "epochs": 1,
   "batch": 2,
   "lr": 0.0002,
   "maxlen": 160,
-  "steps": 9
+  "steps": 63
  },
  "loss": {
-  "mean_last": 2.0707,
+  "mean_last": 1.6142,
   "first5": [
-   1.9599,
-   1.4896,
-   2.0411,
-   1.9798,
-   2.3162
+   1.9912,
+   1.8016,
+   1.809,
+   1.1963,
+   1.8306
   ],
   "last5": [
-   2.3162,
-   2.1064,
-   2.3289,
-   2.4064,
-   2.0084
+   1.1813,
+   1.6088,
+   1.15,
+   1.7466,
+   1.7061
   ],
-  "heldout_base": 2.1524,
-  "heldout_after": 1.725,
-  "heldout_delta": -0.4274,
+  "heldout_base": 2.3588,
+  "heldout_after": 1.8811,
+  "heldout_delta": -0.4777,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 1.14,
+  "probe_sec": 0.92,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.157
+   "ratio_mean": 0.166
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.205
+   "ratio_mean": 0.157
   },
   "aligned": {
    "n": 8,
@@ -82,21 +82,21 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: How can technology, such as electronic health records and telemedicine, suppo",
-    "exp": "ANSWER: Technology can support individuals with cancer by providing access to personalized medical i",
-    "pred_before": " \nA: Electronic health records (EHRs) allow patients to access their medical information from anywhe",
-    "pred_after": "ANSWER: Technology like electronic health records (EHRs) and telemedicine can provide several benefi"
+    "p": "Q: What is a pill splitter, and how does it contribute to effective medication m",
+    "exp": "ANSWER: A pill splitter is a device designed to safely and accurately divide tablets or pills into s",
+    "pred_before": " \nA: A pill splitter is a device that allows for the easy splitting of pills into smaller pieces. Th",
+    "pred_after": "ANSWER: A pill splitter is a device that helps manage the distribution of medications by splitting p"
    },
    {
-    "p": "Q: What are GitHub Actions, how do they interact with Pull Requests and Issues, ",
-    "exp": "ANSWER: **GitHub Actions** is GitHub\u2019s built\u2011in CI/CD (continuous integration/continuous deployment)",
-    "pred_before": " \nA: GitHub Actions is a tool that automates the process of building and deploying software. It can ",
-    "pred_after": "ANSWER: GitHub Actions is a powerful tool that automates the process of building, testing, and deplo"
+    "p": "Q: What is the main topic that Martin Odersky discusses in his keynote, and what",
+    "exp": "ANSWER: The main topic that Martin Odersky discusses in his keynote is the potential end of programm",
+    "pred_before": " \nA: The main topic that Martin Odersky discusses in his keynote is the design of concurrent systems",
+    "pred_after": "ANSWER: Martin Odersky's keynote focuses on the importance of design patterns in software developmen"
    }
   ]
  },
- "runtime_sec": 2281.5,
- "cut_by_budget": true,
+ "runtime_sec": 558.7,
+ "cut_by_budget": false,
  "threads": 4,
  "machine": "x86_64"
 }

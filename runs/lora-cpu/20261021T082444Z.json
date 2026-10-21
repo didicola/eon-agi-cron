@@ -1,0 +1,102 @@
+{
+ "ts": "2026-10-21T08:24:41.489113+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26102108,
+  "ts": "2026-10-21T08:15:22.833047+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26102108
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 63
+ },
+ "loss": {
+  "mean_last": 1.6142,
+  "first5": [
+   1.9912,
+   1.8016,
+   1.809,
+   1.1963,
+   1.8306
+  ],
+  "last5": [
+   1.1813,
+   1.6088,
+   1.15,
+   1.7466,
+   1.7061
+  ],
+  "heldout_base": 2.3588,
+  "heldout_after": 1.8811,
+  "heldout_delta": -0.4777,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 0.92,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.166
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.157
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is a pill splitter, and how does it contribute to effective medication m",
+    "exp": "ANSWER: A pill splitter is a device designed to safely and accurately divide tablets or pills into s",
+    "pred_before": " \nA: A pill splitter is a device that allows for the easy splitting of pills into smaller pieces. Th",
+    "pred_after": "ANSWER: A pill splitter is a device that helps manage the distribution of medications by splitting p"
+   },
+   {
+    "p": "Q: What is the main topic that Martin Odersky discusses in his keynote, and what",
+    "exp": "ANSWER: The main topic that Martin Odersky discusses in his keynote is the potential end of programm",
+    "pred_before": " \nA: The main topic that Martin Odersky discusses in his keynote is the design of concurrent systems",
+    "pred_after": "ANSWER: Martin Odersky's keynote focuses on the importance of design patterns in software developmen"
+   }
+  ]
+ },
+ "runtime_sec": 558.7,
+ "cut_by_budget": false,
+ "threads": 4,
+ "machine": "x86_64"
+}
