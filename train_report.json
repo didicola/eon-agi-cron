@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-21T08:24:41.489113+00:00",
+ "ts": "2026-10-22T08:20:17.510028+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26102108,
-  "ts": "2026-10-21T08:15:22.833047+00:00"
+  "seed": 26102208,
+  "ts": "2026-10-22T08:17:13.147295+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,7 +29,7 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26102108
+  "seed": 26102208
  },
  "train": {
   "epochs": 1,
@@ -39,40 +39,40 @@
   "steps": 63
  },
  "loss": {
-  "mean_last": 1.6142,
+  "mean_last": 1.6359,
   "first5": [
-   1.9912,
-   1.8016,
-   1.809,
-   1.1963,
-   1.8306
+   2.4504,
+   2.5557,
+   2.2515,
+   2.184,
+   1.1713
   ],
   "last5": [
-   1.1813,
-   1.6088,
-   1.15,
-   1.7466,
-   1.7061
+   1.6892,
+   2.0812,
+   2.2849,
+   1.6347,
+   1.2681
   ],
-  "heldout_base": 2.3588,
-  "heldout_after": 1.8811,
-  "heldout_delta": -0.4777,
+  "heldout_base": 2.1707,
+  "heldout_after": 1.6878,
+  "heldout_delta": -0.4829,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 0.92,
+  "probe_sec": 0.18,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.166
+   "ratio_mean": 0.118
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.157
+   "ratio_mean": 0.226
   },
   "aligned": {
    "n": 8,
@@ -82,20 +82,20 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What is a pill splitter, and how does it contribute to effective medication m",
-    "exp": "ANSWER: A pill splitter is a device designed to safely and accurately divide tablets or pills into s",
-    "pred_before": " \nA: A pill splitter is a device that allows for the easy splitting of pills into smaller pieces. Th",
-    "pred_after": "ANSWER: A pill splitter is a device that helps manage the distribution of medications by splitting p"
+    "p": "Q: What is a cyberattack, and how can it affect physical systems like refrigerat",
+    "exp": "ANSWER: A cyberattack is a malicious attempt to disrupt, disable, or exploit a computer system, netw",
+    "pred_before": " \nA: A cyberattack is an attempt to gain unauthorized access to computer systems or networks. Cybera",
+    "pred_after": "ANSWER: A cyberattack refers to an unauthorized attempt by hackers or malicious actors to gain acces"
    },
    {
-    "p": "Q: What is the main topic that Martin Odersky discusses in his keynote, and what",
-    "exp": "ANSWER: The main topic that Martin Odersky discusses in his keynote is the potential end of programm",
-    "pred_before": " \nA: The main topic that Martin Odersky discusses in his keynote is the design of concurrent systems",
-    "pred_after": "ANSWER: Martin Odersky's keynote focuses on the importance of design patterns in software developmen"
+    "p": "Q: What is a BBS, as mentioned in the context of 90s technology?",
+    "exp": "ANSWER: A BBS, or Bulletin Board System, is a computer system that allows users to connect via a dia",
+    "pred_before": " Choose the most suitable option to answer the above question. Options: - computer network - interne",
+    "pred_after": "ANSWER: A BBS (Bulletin Board System) is a computer network where users can post messages and commun"
    }
   ]
  },
- "runtime_sec": 558.7,
+ "runtime_sec": 184.4,
  "cut_by_budget": false,
  "threads": 4,
  "machine": "x86_64"
