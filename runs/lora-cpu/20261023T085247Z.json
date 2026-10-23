@@ -1,0 +1,102 @@
+{
+ "ts": "2026-10-23T08:52:44.463280+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26102308,
+  "ts": "2026-10-23T08:14:01.704587+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26102308
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 11
+ },
+ "loss": {
+  "mean_last": 1.8293,
+  "first5": [
+   1.601,
+   1.653,
+   1.4931,
+   1.8704,
+   2.2537
+  ],
+  "last5": [
+   2.0714,
+   2.1679,
+   1.9166,
+   1.8046,
+   2.0088
+  ],
+  "heldout_base": 2.2217,
+  "heldout_after": 1.8533,
+  "heldout_delta": -0.3684,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 1.4,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.13
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.154
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is Phloem, and how does it relate to Git history?",
+    "exp": "ANSWER: Phloem is a technology that visually represents Git history in a unique, organic way, likene",
+    "pred_before": " \nA: Phloem is a type of vascular tissue in plants that transports water and nutrients. It is found ",
+    "pred_after": "ANSWER: Phloem is a type of data structure that represents the flow of information within a software"
+   },
+   {
+    "p": "Q: How does routing a graphite heat pipe through a smartphone\u2019s hinge help dissi",
+    "exp": "ANSWER: A graphite heat pipe is a sealed channel filled with a small amount of liquid that vaporizes",
+    "pred_before": " \nA: A graphene heat pipe is a type of heat exchanger that uses graphene as the heat transfer materi",
+    "pred_after": "ANSWER: A graphite heat pipe is a type of heat exchanger that uses graphene, a single layer of carbo"
+   }
+  ]
+ },
+ "runtime_sec": 2322.8,
+ "cut_by_budget": true,
+ "threads": 4,
+ "machine": "x86_64"
+}
