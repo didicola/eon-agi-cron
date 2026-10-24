@@ -1,0 +1,102 @@
+{
+ "ts": "2026-10-24T08:32:31.241292+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26102407,
+  "ts": "2026-10-24T07:52:19.922950+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26102407
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 12
+ },
+ "loss": {
+  "mean_last": 1.7858,
+  "first5": [
+   2.2091,
+   1.5841,
+   2.1824,
+   1.926,
+   1.8937
+  ],
+  "last5": [
+   1.4386,
+   1.7823,
+   1.7109,
+   1.7883,
+   2.1746
+  ],
+  "heldout_base": 2.233,
+  "heldout_after": 1.9476,
+  "heldout_delta": -0.2854,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 2.75,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.06
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.107
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: How does statically recompiling PlayStation\u202f2 games to WebAssembly enable the",
+    "exp": "ANSWER: Statically recompiling a PS2 game means taking the original PlayStation\u202f2 executable (a bina",
+    "pred_before": "\r\n\r\nA: Statically recompiling PlayStation\u202f2 games to WebAssembly enables them to run in a web browse",
+    "pred_after": "ANSWER: Statically recompiling PlayStation\u202f2 games to WebAssembly enables them to run in a web brows"
+   },
+   {
+    "p": "Q: How does Guitoro let you play a virtual guitar using a standard computer keyb",
+    "exp": "ANSWER: Guitoro maps rows of keyboard keys to the six strings of a guitar and assigns nearby keys to",
+    "pred_before": " \nA: The Guitoro is a virtual instrument that allows users to play a virtual guitar by typing in the",
+    "pred_after": "ANSWER: Guitoro is a software application that allows users to play virtual guitars using a standard"
+   }
+  ]
+ },
+ "runtime_sec": 2411.3,
+ "cut_by_budget": true,
+ "threads": 4,
+ "machine": "x86_64"
+}
