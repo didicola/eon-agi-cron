@@ -1,0 +1,102 @@
+{
+ "ts": "2026-10-25T08:08:21.262165+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26102508,
+  "ts": "2026-10-25T08:05:05.685962+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26102508
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 63
+ },
+ "loss": {
+  "mean_last": 1.7086,
+  "first5": [
+   2.2571,
+   1.8195,
+   2.7595,
+   2.1346,
+   1.3772
+  ],
+  "last5": [
+   1.7046,
+   1.8107,
+   1.2292,
+   1.8946,
+   0.9993
+  ],
+  "heldout_base": 2.2355,
+  "heldout_after": 1.7673,
+  "heldout_delta": -0.4682,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 0.15,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.169
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.253
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is the \u201ctwo\u2011stack sliding\u2011window aggregation\u201d technique, and how does it",
+    "exp": "ANSWER: The two\u2011stack sliding\u2011window aggregation (often called the \u201ctwo\u2011stack queue\u201d or \u201ctwo\u2011stack w",
+    "pred_before": " \nA: The two-stack sliding-window aggregation technique enables constant-time updates for computing ",
+    "pred_after": "ANSWER: The two\u2011stack sliding\u2011window aggregation technique involves storing two separate stacks of e"
+   },
+   {
+    "p": "Q: How do Chromium development practices differ between Google, the primary main",
+    "exp": "ANSWER: Google leads Chromium development as the core maintainer, setting the roadmap, prioritizing ",
+    "pred_before": "\r\n\r\nA: The main difference is that Google's Chromium project has a more centralized approach to deve",
+    "pred_after": "ANSWER: In general, Google\u2019s Chromium is more tightly integrated with its own browser engine, which "
+   }
+  ]
+ },
+ "runtime_sec": 195.6,
+ "cut_by_budget": false,
+ "threads": 4,
+ "machine": "x86_64"
+}
