@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-25T08:08:21.262165+00:00",
+ "ts": "2026-10-26T09:08:41.336436+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26102508,
-  "ts": "2026-10-25T08:05:05.685962+00:00"
+  "seed": 26102608,
+  "ts": "2026-10-26T08:29:17.460072+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,50 +29,50 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26102508
+  "seed": 26102608
  },
  "train": {
   "epochs": 1,
   "batch": 2,
   "lr": 0.0002,
   "maxlen": 160,
-  "steps": 63
+  "steps": 11
  },
  "loss": {
-  "mean_last": 1.7086,
+  "mean_last": 1.8233,
   "first5": [
-   2.2571,
-   1.8195,
-   2.7595,
-   2.1346,
-   1.3772
+   2.2734,
+   1.8902,
+   1.6164,
+   1.7134,
+   2.5962
   ],
   "last5": [
-   1.7046,
-   1.8107,
-   1.2292,
-   1.8946,
-   0.9993
+   2.4041,
+   1.9145,
+   1.6237,
+   1.313,
+   1.4
   ],
-  "heldout_base": 2.2355,
-  "heldout_after": 1.7673,
-  "heldout_delta": -0.4682,
+  "heldout_base": 2.1142,
+  "heldout_after": 1.6267,
+  "heldout_delta": -0.4875,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 0.15,
+  "probe_sec": 1.59,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.169
+   "ratio_mean": 0.19
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.253
+   "ratio_mean": 0.206
   },
   "aligned": {
    "n": 8,
@@ -82,21 +82,21 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What is the \u201ctwo\u2011stack sliding\u2011window aggregation\u201d technique, and how does it",
-    "exp": "ANSWER: The two\u2011stack sliding\u2011window aggregation (often called the \u201ctwo\u2011stack queue\u201d or \u201ctwo\u2011stack w",
-    "pred_before": " \nA: The two-stack sliding-window aggregation technique enables constant-time updates for computing ",
-    "pred_after": "ANSWER: The two\u2011stack sliding\u2011window aggregation technique involves storing two separate stacks of e"
+    "p": "What types of human-like abilities does artificial intelligence aim to replicate",
+    "exp": "ANSWER: Artificial intelligence seeks to replicate human-like abilities such as learning, reasoning,",
+    "pred_before": " Artificial intelligence aims to replicate human-like abilities in computational systems through the",
+    "pred_after": "ANSWER: Artificial intelligence aims to replicate human-like abilities by developing algorithms that"
    },
    {
-    "p": "Q: How do Chromium development practices differ between Google, the primary main",
-    "exp": "ANSWER: Google leads Chromium development as the core maintainer, setting the roadmap, prioritizing ",
-    "pred_before": "\r\n\r\nA: The main difference is that Google's Chromium project has a more centralized approach to deve",
-    "pred_after": "ANSWER: In general, Google\u2019s Chromium is more tightly integrated with its own browser engine, which "
+    "p": "Q: What is AI, the technology concept mentioned in the headline about Kevin Kell",
+    "exp": "ANSWER: AI, or Artificial Intelligence, refers to the development of computer systems that can perfo",
+    "pred_before": "  Answer the above question. If the question is unanswerable, provide answer with \"zero\".\nzero\nYou a",
+    "pred_after": "ANSWER: Artificial Intelligence (AI) refers to a class of computing that involves the development of"
    }
   ]
  },
- "runtime_sec": 195.6,
- "cut_by_budget": false,
+ "runtime_sec": 2363.9,
+ "cut_by_budget": true,
  "threads": 4,
  "machine": "x86_64"
 }
