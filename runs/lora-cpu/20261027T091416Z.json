@@ -1,0 +1,102 @@
+{
+ "ts": "2026-10-27T09:14:12.903275+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26102708,
+  "ts": "2026-10-27T08:37:13.090146+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26102708
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 10
+ },
+ "loss": {
+  "mean_last": 1.7508,
+  "first5": [
+   2.0239,
+   1.9128,
+   2.1604,
+   1.4316,
+   1.5087
+  ],
+  "last5": [
+   1.3323,
+   1.4866,
+   1.5706,
+   1.5211,
+   2.5598
+  ],
+  "heldout_base": 2.3041,
+  "heldout_after": 1.9717,
+  "heldout_delta": -0.3324,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 1.14,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.132
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.164
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is CGI in the context of web development, and how does it differ from Fa",
+    "exp": "ANSWER: CGI (Common Gateway Interface) is a standard protocol that allows web servers to execute ext",
+    "pred_before": " \nA: CGI stands for \"Common Gateway Interface\" and refers to a protocol used by web servers to commu",
+    "pred_after": "ANSWER: CGI (Common Gateway Interface) refers to a protocol used for communication between a web ser"
+   },
+   {
+    "p": "Q: What is vinyl in the context of music distribution and technology?",
+    "exp": "ANSWER: In the context of music distribution and technology, vinyl refers to a type of analog sound ",
+    "pred_before": "  A. record player  B. record label  C. record company  D. record store  E. record",
+    "pred_after": "ANSWER: Vinyl refers to a type of record, typically made from a thin layer of plastic that can be st"
+   }
+  ]
+ },
+ "runtime_sec": 2219.8,
+ "cut_by_budget": true,
+ "threads": 4,
+ "machine": "x86_64"
+}
