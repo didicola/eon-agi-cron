@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-27T09:14:12.903275+00:00",
+ "ts": "2026-10-28T09:56:12.447757+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26102708,
-  "ts": "2026-10-27T08:37:13.090146+00:00"
+  "seed": 26102809,
+  "ts": "2026-10-28T09:17:26.605222+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,50 +29,50 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26102708
+  "seed": 26102809
  },
  "train": {
   "epochs": 1,
   "batch": 2,
   "lr": 0.0002,
   "maxlen": 160,
-  "steps": 10
+  "steps": 12
  },
  "loss": {
-  "mean_last": 1.7508,
+  "mean_last": 1.6479,
   "first5": [
-   2.0239,
-   1.9128,
-   2.1604,
-   1.4316,
-   1.5087
+   1.5822,
+   2.7338,
+   1.7299,
+   1.9138,
+   2.145
   ],
   "last5": [
-   1.3323,
-   1.4866,
-   1.5706,
-   1.5211,
-   2.5598
+   1.0813,
+   1.4022,
+   1.366,
+   1.6269,
+   1.0753
   ],
-  "heldout_base": 2.3041,
-  "heldout_after": 1.9717,
-  "heldout_delta": -0.3324,
+  "heldout_base": 1.9404,
+  "heldout_after": 1.4322,
+  "heldout_delta": -0.5082,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 1.14,
+  "probe_sec": 1.3,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.132
+   "ratio_mean": 0.129
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.164
+   "ratio_mean": 0.135
   },
   "aligned": {
    "n": 8,
@@ -82,20 +82,20 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What is CGI in the context of web development, and how does it differ from Fa",
-    "exp": "ANSWER: CGI (Common Gateway Interface) is a standard protocol that allows web servers to execute ext",
-    "pred_before": " \nA: CGI stands for \"Common Gateway Interface\" and refers to a protocol used by web servers to commu",
-    "pred_after": "ANSWER: CGI (Common Gateway Interface) refers to a protocol used for communication between a web ser"
+    "p": "Q: What is a leap second and why is it added to UTC?",
+    "exp": "ANSWER: A leap second is a one-second adjustment added to Coordinated Universal Time (UTC) to accoun",
+    "pred_before": " A: A leap second is an extra second added to the time of day in order to keep the 24-hour",
+    "pred_after": "ANSWER: A leap second is an extra second added to the timekeeping system, typically every 12 hours,"
    },
    {
-    "p": "Q: What is vinyl in the context of music distribution and technology?",
-    "exp": "ANSWER: In the context of music distribution and technology, vinyl refers to a type of analog sound ",
-    "pred_before": "  A. record player  B. record label  C. record company  D. record store  E. record",
-    "pred_after": "ANSWER: Vinyl refers to a type of record, typically made from a thin layer of plastic that can be st"
+    "p": "Q: What is UEFI, a technology mentioned in the context of the Libreboot release?",
+    "exp": "ANSWER: UEFI (Unified Extensible Firmware Interface) is a specification for firmware that replaces t",
+    "pred_before": " \nA: UEFI stands for Unified Extensible Firmware Interface. It is a standard that allows computer sy",
+    "pred_after": "ANSWER: UEFI stands for Unified Extensible Firmware Interface, which is a standard that allows compu"
    }
   ]
  },
- "runtime_sec": 2219.8,
+ "runtime_sec": 2325.8,
  "cut_by_budget": true,
  "threads": 4,
  "machine": "x86_64"
