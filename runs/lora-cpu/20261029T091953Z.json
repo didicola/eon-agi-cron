@@ -1,0 +1,102 @@
+{
+ "ts": "2026-10-29T09:19:50.783875+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26102909,
+  "ts": "2026-10-29T09:17:51.019334+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26102909
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 63
+ },
+ "loss": {
+  "mean_last": 1.7642,
+  "first5": [
+   1.6932,
+   2.9814,
+   1.8185,
+   1.5544,
+   2.1128
+  ],
+  "last5": [
+   2.1416,
+   2.99,
+   2.5219,
+   2.1979,
+   2.5309
+  ],
+  "heldout_base": 2.3494,
+  "heldout_after": 1.8707,
+  "heldout_delta": -0.4787,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 0.12,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.099
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.146
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is the primary function of a shape-sensing sheet in terms of tracking it",
+    "exp": "ANSWER: A shape-sensing sheet is designed to digitally track its own movement, allowing it to monito",
+    "pred_before": " \nA:\n\nThe primary function of a shape-sensing sheet, also known as a motion sensor or accelerometer,",
+    "pred_after": "ANSWER: A shape-sensing sheet, also known as a motion sensor or trackable sheet, typically includes "
+   },
+   {
+    "p": "Q: What is Dekton, and what type of material or technology is it related to?",
+    "exp": "ANSWER: Dekton is a type of ultracompact surface material, often used for architectural and design a",
+    "pred_before": " \nA: The answer is that Dekton is a synthetic polymer. It is used in the production of various mater",
+    "pred_after": "ANSWER: Dekton is a 3D printed polymer-based material that combines the strength and durability of t"
+   }
+  ]
+ },
+ "runtime_sec": 119.8,
+ "cut_by_budget": false,
+ "threads": 4,
+ "machine": "x86_64"
+}
