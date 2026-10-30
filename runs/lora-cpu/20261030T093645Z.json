@@ -1,0 +1,102 @@
+{
+ "ts": "2026-10-30T09:36:41.952302+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26103009,
+  "ts": "2026-10-30T09:34:34.522114+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26103009
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 63
+ },
+ "loss": {
+  "mean_last": 1.7672,
+  "first5": [
+   2.0081,
+   2.4585,
+   1.6185,
+   2.4919,
+   2.1752
+  ],
+  "last5": [
+   1.5644,
+   1.7446,
+   1.3313,
+   2.2162,
+   1.9867
+  ],
+  "heldout_base": 2.2,
+  "heldout_after": 1.7529,
+  "heldout_delta": -0.4471,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 0.12,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.101
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.143
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What does \"Math 2.0\" refer to in the context of Terence Tao's work?",
+    "exp": "ANSWER: \"Math 2.0\" is a concept that refers to the use of web-based technologies and collaborative t",
+    "pred_before": " I'm not sure what this means, but it seems like a reference to something that is new and different ",
+    "pred_after": "ANSWER: In the context of Terence Tao's work, \"Math 2.0\" refers to a specific"
+   },
+   {
+    "p": "What scientific discipline studies matter, its fundamental constituents, its mot",
+    "exp": "ANSWER: That discipline is **physics**. It is the scientific study of matter, its basic components, ",
+    "pred_before": " The answer is:\n\nA) Physics\nB) Chemistry\nC) Biology\nD) Astronomy\n\nTo determine which scientific",
+    "pred_after": "ANSWER: Physics. The study of matter, energy, and their interactions is a branch of physics that dea"
+   }
+  ]
+ },
+ "runtime_sec": 127.4,
+ "cut_by_budget": false,
+ "threads": 4,
+ "machine": "x86_64"
+}
