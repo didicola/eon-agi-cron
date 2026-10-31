@@ -1,0 +1,102 @@
+{
+ "ts": "2026-10-31T09:55:15.586835+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26103109,
+  "ts": "2026-10-31T09:15:56.267094+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26103109
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 9
+ },
+ "loss": {
+  "mean_last": 1.7541,
+  "first5": [
+   2.3087,
+   1.5585,
+   1.4561,
+   2.106,
+   1.2121
+  ],
+  "last5": [
+   1.2121,
+   2.2514,
+   2.0235,
+   1.3944,
+   1.4765
+  ],
+  "heldout_base": 1.949,
+  "heldout_after": 1.6041,
+  "heldout_delta": -0.3449,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 1.58,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.127
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.14
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What does \u201cMath\u202f2.0,\u201d as discussed by Terence Tao, refer to, and how does it ",
+    "exp": "ANSWER: \u201cMath\u202f2.0\u201d is a term coined by Fields Medalist Terence\u202fTao to describe a modern, collaborati",
+    "pred_before": " \nA: The term \"Math 2.0\" refers to a new era of mathematics that aims to make mathematics",
+    "pred_after": "ANSWER: The term \u201cMath 2.0\u201d refers to a new era of mathematics that aims to make significant"
+   },
+   {
+    "p": "Q: What is \"Ways of Seeing\" by John Berger, and how does it relate to technology",
+    "exp": "ANSWER: \"Ways of Seeing\" by John Berger is a 1972 book and BBC series that critiques traditional way",
+    "pred_before": " \nA: The book explores the ways in which we see things through our eyes. It argues that modern socie",
+    "pred_after": "ANSWER: \"Ways of Seeing\" is a book that explores the ways in which we see the world through our"
+   }
+  ]
+ },
+ "runtime_sec": 2359.3,
+ "cut_by_budget": true,
+ "threads": 4,
+ "machine": "x86_64"
+}

@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-30T09:36:41.952302+00:00",
+ "ts": "2026-10-31T09:55:15.586835+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26103009,
-  "ts": "2026-10-30T09:34:34.522114+00:00"
+  "seed": 26103109,
+  "ts": "2026-10-31T09:15:56.267094+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,50 +29,50 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26103009
+  "seed": 26103109
  },
  "train": {
   "epochs": 1,
   "batch": 2,
   "lr": 0.0002,
   "maxlen": 160,
-  "steps": 63
+  "steps": 9
  },
  "loss": {
-  "mean_last": 1.7672,
+  "mean_last": 1.7541,
   "first5": [
-   2.0081,
-   2.4585,
-   1.6185,
-   2.4919,
-   2.1752
+   2.3087,
+   1.5585,
+   1.4561,
+   2.106,
+   1.2121
   ],
   "last5": [
-   1.5644,
-   1.7446,
-   1.3313,
-   2.2162,
-   1.9867
+   1.2121,
+   2.2514,
+   2.0235,
+   1.3944,
+   1.4765
   ],
-  "heldout_base": 2.2,
-  "heldout_after": 1.7529,
-  "heldout_delta": -0.4471,
+  "heldout_base": 1.949,
+  "heldout_after": 1.6041,
+  "heldout_delta": -0.3449,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 0.12,
+  "probe_sec": 1.58,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.101
+   "ratio_mean": 0.127
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.143
+   "ratio_mean": 0.14
   },
   "aligned": {
    "n": 8,
@@ -82,21 +82,21 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What does \"Math 2.0\" refer to in the context of Terence Tao's work?",
-    "exp": "ANSWER: \"Math 2.0\" is a concept that refers to the use of web-based technologies and collaborative t",
-    "pred_before": " I'm not sure what this means, but it seems like a reference to something that is new and different ",
-    "pred_after": "ANSWER: In the context of Terence Tao's work, \"Math 2.0\" refers to a specific"
+    "p": "Q: What does \u201cMath\u202f2.0,\u201d as discussed by Terence Tao, refer to, and how does it ",
+    "exp": "ANSWER: \u201cMath\u202f2.0\u201d is a term coined by Fields Medalist Terence\u202fTao to describe a modern, collaborati",
+    "pred_before": " \nA: The term \"Math 2.0\" refers to a new era of mathematics that aims to make mathematics",
+    "pred_after": "ANSWER: The term \u201cMath 2.0\u201d refers to a new era of mathematics that aims to make significant"
    },
    {
-    "p": "What scientific discipline studies matter, its fundamental constituents, its mot",
-    "exp": "ANSWER: That discipline is **physics**. It is the scientific study of matter, its basic components, ",
-    "pred_before": " The answer is:\n\nA) Physics\nB) Chemistry\nC) Biology\nD) Astronomy\n\nTo determine which scientific",
-    "pred_after": "ANSWER: Physics. The study of matter, energy, and their interactions is a branch of physics that dea"
+    "p": "Q: What is \"Ways of Seeing\" by John Berger, and how does it relate to technology",
+    "exp": "ANSWER: \"Ways of Seeing\" by John Berger is a 1972 book and BBC series that critiques traditional way",
+    "pred_before": " \nA: The book explores the ways in which we see things through our eyes. It argues that modern socie",
+    "pred_after": "ANSWER: \"Ways of Seeing\" is a book that explores the ways in which we see the world through our"
    }
   ]
  },
- "runtime_sec": 127.4,
- "cut_by_budget": false,
+ "runtime_sec": 2359.3,
+ "cut_by_budget": true,
  "threads": 4,
  "machine": "x86_64"
 }
