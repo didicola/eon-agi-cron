@@ -1,5 +1,5 @@
 {
- "ts": "2026-10-31T09:55:15.586835+00:00",
+ "ts": "2026-11-01T10:42:15.324474+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26103109,
-  "ts": "2026-10-31T09:15:56.267094+00:00"
+  "seed": 26110110,
+  "ts": "2026-11-01T10:02:25.598151+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,50 +29,50 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26103109
+  "seed": 26110110
  },
  "train": {
   "epochs": 1,
   "batch": 2,
   "lr": 0.0002,
   "maxlen": 160,
-  "steps": 9
+  "steps": 12
  },
  "loss": {
-  "mean_last": 1.7541,
+  "mean_last": 1.8186,
   "first5": [
-   2.3087,
-   1.5585,
-   1.4561,
-   2.106,
-   1.2121
+   1.7491,
+   1.4461,
+   1.9962,
+   1.6374,
+   1.6684
   ],
   "last5": [
-   1.2121,
-   2.2514,
-   2.0235,
-   1.3944,
-   1.4765
+   1.742,
+   1.8,
+   3.6634,
+   1.2806,
+   1.5337
   ],
-  "heldout_base": 1.949,
-  "heldout_after": 1.6041,
-  "heldout_delta": -0.3449,
+  "heldout_base": 2.2841,
+  "heldout_after": 1.9472,
+  "heldout_delta": -0.3369,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 1.58,
+  "probe_sec": 1.14,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.127
+   "ratio_mean": 0.116
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.14
+   "ratio_mean": 0.161
   },
   "aligned": {
    "n": 8,
@@ -82,20 +82,20 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What does \u201cMath\u202f2.0,\u201d as discussed by Terence Tao, refer to, and how does it ",
-    "exp": "ANSWER: \u201cMath\u202f2.0\u201d is a term coined by Fields Medalist Terence\u202fTao to describe a modern, collaborati",
-    "pred_before": " \nA: The term \"Math 2.0\" refers to a new era of mathematics that aims to make mathematics",
-    "pred_after": "ANSWER: The term \u201cMath 2.0\u201d refers to a new era of mathematics that aims to make significant"
+    "p": "What are the two main contexts in which the term \u201cneural network\u201d is used, and h",
+    "exp": "ANSWER: The term \u201cneural network\u201d refers to two main contexts: (1) **Biological neural networks** in",
+    "pred_before": " The term \"neural network\" is commonly used to describe a type of artificial intelligence model that",
+    "pred_after": "ANSWER: Neural networks are a type of machine learning model that can be used for both supervised an"
    },
    {
-    "p": "Q: What is \"Ways of Seeing\" by John Berger, and how does it relate to technology",
-    "exp": "ANSWER: \"Ways of Seeing\" by John Berger is a 1972 book and BBC series that critiques traditional way",
-    "pred_before": " \nA: The book explores the ways in which we see things through our eyes. It argues that modern socie",
-    "pred_after": "ANSWER: \"Ways of Seeing\" is a book that explores the ways in which we see the world through our"
+    "p": "Q: What types of tasks can artificial intelligence systems perform?",
+    "exp": "ANSWER: Artificial intelligence systems can perform tasks typically associated with human intelligen",
+    "pred_before": "  A. make decisions  B. solve problems  C. create art  D. generate speech  E. increase",
+    "pred_after": "ANSWER: Artificial Intelligence (AI) systems can perform a wide range of tasks, including but not li"
    }
   ]
  },
- "runtime_sec": 2359.3,
+ "runtime_sec": 2389.7,
  "cut_by_budget": true,
  "threads": 4,
  "machine": "x86_64"

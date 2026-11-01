@@ -1,0 +1,102 @@
+{
+ "ts": "2026-11-01T10:42:15.324474+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26110110,
+  "ts": "2026-11-01T10:02:25.598151+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26110110
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 12
+ },
+ "loss": {
+  "mean_last": 1.8186,
+  "first5": [
+   1.7491,
+   1.4461,
+   1.9962,
+   1.6374,
+   1.6684
+  ],
+  "last5": [
+   1.742,
+   1.8,
+   3.6634,
+   1.2806,
+   1.5337
+  ],
+  "heldout_base": 2.2841,
+  "heldout_after": 1.9472,
+  "heldout_delta": -0.3369,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 1.14,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.116
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.161
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "What are the two main contexts in which the term \u201cneural network\u201d is used, and h",
+    "exp": "ANSWER: The term \u201cneural network\u201d refers to two main contexts: (1) **Biological neural networks** in",
+    "pred_before": " The term \"neural network\" is commonly used to describe a type of artificial intelligence model that",
+    "pred_after": "ANSWER: Neural networks are a type of machine learning model that can be used for both supervised an"
+   },
+   {
+    "p": "Q: What types of tasks can artificial intelligence systems perform?",
+    "exp": "ANSWER: Artificial intelligence systems can perform tasks typically associated with human intelligen",
+    "pred_before": "  A. make decisions  B. solve problems  C. create art  D. generate speech  E. increase",
+    "pred_after": "ANSWER: Artificial Intelligence (AI) systems can perform a wide range of tasks, including but not li"
+   }
+  ]
+ },
+ "runtime_sec": 2389.7,
+ "cut_by_budget": true,
+ "threads": 4,
+ "machine": "x86_64"
+}
