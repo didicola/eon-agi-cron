@@ -1,0 +1,102 @@
+{
+ "ts": "2026-11-02T10:39:45.733693+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26110210,
+  "ts": "2026-11-02T10:30:11.140020+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26110210
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 63
+ },
+ "loss": {
+  "mean_last": 1.7482,
+  "first5": [
+   1.4945,
+   1.9186,
+   1.6564,
+   1.9644,
+   1.3819
+  ],
+  "last5": [
+   1.2077,
+   1.4694,
+   1.4703,
+   1.5884,
+   1.4736
+  ],
+  "heldout_base": 2.4128,
+  "heldout_after": 1.9628,
+  "heldout_delta": -0.45,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 0.66,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.216
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.3
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is AI, the technology concept mentioned in the headline, and how is it u",
+    "exp": "ANSWER: AI, or Artificial Intelligence, refers to the development of computer systems that can perfo",
+    "pred_before": " \nA: Artificial intelligence (AI) refers to a broad range of computer technologies that enable machi",
+    "pred_after": "ANSWER: AI refers to Artificial Intelligence, which involves the development of computer systems tha"
+   },
+   {
+    "p": "Q: What is RPKI and how does it contribute to internet security?",
+    "exp": "ANSWER: RPKI (Resource Public Key Infrastructure) is a security framework that helps prevent route h",
+    "pred_before": " \nA: RPKI stands for Root Public Key Infrastructure. It provides a way for users to obtain public ke",
+    "pred_after": "ANSWER: RPKI stands for Resource Public Key Infrastructure, which is a type of public key infrastruc"
+   }
+  ]
+ },
+ "runtime_sec": 574.6,
+ "cut_by_budget": false,
+ "threads": 4,
+ "machine": "x86_64"
+}

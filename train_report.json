@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-01T10:42:15.324474+00:00",
+ "ts": "2026-11-02T10:39:45.733693+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26110110,
-  "ts": "2026-11-01T10:02:25.598151+00:00"
+  "seed": 26110210,
+  "ts": "2026-11-02T10:30:11.140020+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,50 +29,50 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26110110
+  "seed": 26110210
  },
  "train": {
   "epochs": 1,
   "batch": 2,
   "lr": 0.0002,
   "maxlen": 160,
-  "steps": 12
+  "steps": 63
  },
  "loss": {
-  "mean_last": 1.8186,
+  "mean_last": 1.7482,
   "first5": [
-   1.7491,
-   1.4461,
-   1.9962,
-   1.6374,
-   1.6684
+   1.4945,
+   1.9186,
+   1.6564,
+   1.9644,
+   1.3819
   ],
   "last5": [
-   1.742,
-   1.8,
-   3.6634,
-   1.2806,
-   1.5337
+   1.2077,
+   1.4694,
+   1.4703,
+   1.5884,
+   1.4736
   ],
-  "heldout_base": 2.2841,
-  "heldout_after": 1.9472,
-  "heldout_delta": -0.3369,
+  "heldout_base": 2.4128,
+  "heldout_after": 1.9628,
+  "heldout_delta": -0.45,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 1.14,
+  "probe_sec": 0.66,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.116
+   "ratio_mean": 0.216
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.161
+   "ratio_mean": 0.3
   },
   "aligned": {
    "n": 8,
@@ -82,21 +82,21 @@
   "skipped": null,
   "examples": [
    {
-    "p": "What are the two main contexts in which the term \u201cneural network\u201d is used, and h",
-    "exp": "ANSWER: The term \u201cneural network\u201d refers to two main contexts: (1) **Biological neural networks** in",
-    "pred_before": " The term \"neural network\" is commonly used to describe a type of artificial intelligence model that",
-    "pred_after": "ANSWER: Neural networks are a type of machine learning model that can be used for both supervised an"
+    "p": "Q: What is AI, the technology concept mentioned in the headline, and how is it u",
+    "exp": "ANSWER: AI, or Artificial Intelligence, refers to the development of computer systems that can perfo",
+    "pred_before": " \nA: Artificial intelligence (AI) refers to a broad range of computer technologies that enable machi",
+    "pred_after": "ANSWER: AI refers to Artificial Intelligence, which involves the development of computer systems tha"
    },
    {
-    "p": "Q: What types of tasks can artificial intelligence systems perform?",
-    "exp": "ANSWER: Artificial intelligence systems can perform tasks typically associated with human intelligen",
-    "pred_before": "  A. make decisions  B. solve problems  C. create art  D. generate speech  E. increase",
-    "pred_after": "ANSWER: Artificial Intelligence (AI) systems can perform a wide range of tasks, including but not li"
+    "p": "Q: What is RPKI and how does it contribute to internet security?",
+    "exp": "ANSWER: RPKI (Resource Public Key Infrastructure) is a security framework that helps prevent route h",
+    "pred_before": " \nA: RPKI stands for Root Public Key Infrastructure. It provides a way for users to obtain public ke",
+    "pred_after": "ANSWER: RPKI stands for Resource Public Key Infrastructure, which is a type of public key infrastruc"
    }
   ]
  },
- "runtime_sec": 2389.7,
- "cut_by_budget": true,
+ "runtime_sec": 574.6,
+ "cut_by_budget": false,
  "threads": 4,
  "machine": "x86_64"
 }
