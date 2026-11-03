@@ -1,0 +1,102 @@
+{
+ "ts": "2026-11-03T10:30:31.686906+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26110310,
+  "ts": "2026-11-03T10:27:26.643521+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26110310
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 63
+ },
+ "loss": {
+  "mean_last": 1.7688,
+  "first5": [
+   2.1463,
+   2.0544,
+   1.1702,
+   1.8889,
+   1.746
+  ],
+  "last5": [
+   2.1777,
+   1.3836,
+   1.3809,
+   1.2145,
+   2.0947
+  ],
+  "heldout_base": 2.1724,
+  "heldout_after": 1.6676,
+  "heldout_delta": -0.5048,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 0.16,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.143
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.149
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is MLX in the context of Apple's ML Research, and how does it relate to ",
+    "exp": "ANSWER: MLX is a framework for machine learning (ML) acceleration, and in the context of Apple's ML ",
+    "pred_before": " A: The MLX is a machine learning library for the Mac. It was created by Apple Research and released",
+    "pred_after": "ANSWER: MLX stands for Machine Learning X, which refers to a specific type of machine learning algor"
+   },
+   {
+    "p": "Q: What defining characteristics must a set of instructions have to be considere",
+    "exp": "ANSWER: A set of instructions is considered an algorithm if it is **well\u2011defined**, provides a **sol",
+    "pred_before": " An algorithm is defined as a well-defined procedure for solving a problem. It must be finite in len",
+    "pred_after": "ANSWER: An algorithm is defined as a well-structured sequence of steps that can solve a specific pro"
+   }
+  ]
+ },
+ "runtime_sec": 185.0,
+ "cut_by_budget": false,
+ "threads": 4,
+ "machine": "x86_64"
+}
