@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-03T10:30:31.686906+00:00",
+ "ts": "2026-11-05T10:20:00.935200+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26110310,
-  "ts": "2026-11-03T10:27:26.643521+00:00"
+  "seed": 26110510,
+  "ts": "2026-11-05T10:18:08.898744+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,7 +29,7 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26110310
+  "seed": 26110510
  },
  "train": {
   "epochs": 1,
@@ -39,40 +39,40 @@
   "steps": 63
  },
  "loss": {
-  "mean_last": 1.7688,
+  "mean_last": 1.6606,
   "first5": [
-   2.1463,
-   2.0544,
-   1.1702,
-   1.8889,
-   1.746
+   2.2688,
+   1.6704,
+   2.5534,
+   2.1147,
+   1.3038
   ],
   "last5": [
-   2.1777,
-   1.3836,
-   1.3809,
-   1.2145,
-   2.0947
+   1.3895,
+   1.6132,
+   1.7083,
+   1.8301,
+   1.462
   ],
-  "heldout_base": 2.1724,
-  "heldout_after": 1.6676,
-  "heldout_delta": -0.5048,
+  "heldout_base": 2.2924,
+  "heldout_after": 1.7792,
+  "heldout_delta": -0.5132,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 0.16,
+  "probe_sec": 0.14,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.143
+   "ratio_mean": 0.114
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.149
+   "ratio_mean": 0.23
   },
   "aligned": {
    "n": 8,
@@ -82,20 +82,20 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What is MLX in the context of Apple's ML Research, and how does it relate to ",
-    "exp": "ANSWER: MLX is a framework for machine learning (ML) acceleration, and in the context of Apple's ML ",
-    "pred_before": " A: The MLX is a machine learning library for the Mac. It was created by Apple Research and released",
-    "pred_after": "ANSWER: MLX stands for Machine Learning X, which refers to a specific type of machine learning algor"
+    "p": "Q: What is a TUI, and how does Spotatui\u2019s Text\u2011User\u2011Interface let users control ",
+    "exp": "ANSWER: A TUI (Text User Interface) is a program that runs in a terminal or console window and lets ",
+    "pred_before": " \n A: The text user interface (TUI) of Spotatui allows users to interact with Spotify in a more",
+    "pred_after": "ANSWER: A TUI (Text\u2011User\u2011Interface) is a graphical user interface that allows users to interact with"
    },
    {
-    "p": "Q: What defining characteristics must a set of instructions have to be considere",
-    "exp": "ANSWER: A set of instructions is considered an algorithm if it is **well\u2011defined**, provides a **sol",
-    "pred_before": " An algorithm is defined as a well-defined procedure for solving a problem. It must be finite in len",
-    "pred_after": "ANSWER: An algorithm is defined as a well-structured sequence of steps that can solve a specific pro"
+    "p": "Q: What groundbreaking 3D graphics techniques did the Nintendo 64 hardware and i",
+    "exp": "ANSWER: The Nintendo 64 introduced several key technologies that made Super\u202fMario\u202f64 possible:",
+    "pred_before": " I'm trying to decide if there is more than one correct answer to this question. Can you tell me abo",
+    "pred_after": "ANSWER: The Nintendo 64 hardware and its development tools enabled the creation of Super Mario 64 by"
    }
   ]
  },
- "runtime_sec": 185.0,
+ "runtime_sec": 112.0,
  "cut_by_budget": false,
  "threads": 4,
  "machine": "x86_64"

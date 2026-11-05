@@ -1,0 +1,102 @@
+{
+ "ts": "2026-11-05T10:20:00.935200+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26110510,
+  "ts": "2026-11-05T10:18:08.898744+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26110510
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 63
+ },
+ "loss": {
+  "mean_last": 1.6606,
+  "first5": [
+   2.2688,
+   1.6704,
+   2.5534,
+   2.1147,
+   1.3038
+  ],
+  "last5": [
+   1.3895,
+   1.6132,
+   1.7083,
+   1.8301,
+   1.462
+  ],
+  "heldout_base": 2.2924,
+  "heldout_after": 1.7792,
+  "heldout_delta": -0.5132,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 0.14,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.114
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.23
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is a TUI, and how does Spotatui\u2019s Text\u2011User\u2011Interface let users control ",
+    "exp": "ANSWER: A TUI (Text User Interface) is a program that runs in a terminal or console window and lets ",
+    "pred_before": " \n A: The text user interface (TUI) of Spotatui allows users to interact with Spotify in a more",
+    "pred_after": "ANSWER: A TUI (Text\u2011User\u2011Interface) is a graphical user interface that allows users to interact with"
+   },
+   {
+    "p": "Q: What groundbreaking 3D graphics techniques did the Nintendo 64 hardware and i",
+    "exp": "ANSWER: The Nintendo 64 introduced several key technologies that made Super\u202fMario\u202f64 possible:",
+    "pred_before": " I'm trying to decide if there is more than one correct answer to this question. Can you tell me abo",
+    "pred_after": "ANSWER: The Nintendo 64 hardware and its development tools enabled the creation of Super Mario 64 by"
+   }
+  ]
+ },
+ "runtime_sec": 112.0,
+ "cut_by_budget": false,
+ "threads": 4,
+ "machine": "x86_64"
+}
