@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-05T10:20:00.935200+00:00",
+ "ts": "2026-11-06T10:23:57.140264+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26110510,
-  "ts": "2026-11-05T10:18:08.898744+00:00"
+  "seed": 26110610,
+  "ts": "2026-11-06T10:20:51.233780+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,7 +29,7 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26110510
+  "seed": 26110610
  },
  "train": {
   "epochs": 1,
@@ -39,40 +39,40 @@
   "steps": 63
  },
  "loss": {
-  "mean_last": 1.6606,
+  "mean_last": 1.6699,
   "first5": [
-   2.2688,
-   1.6704,
-   2.5534,
-   2.1147,
-   1.3038
+   2.0757,
+   2.1622,
+   1.1406,
+   2.2089,
+   1.2441
   ],
   "last5": [
-   1.3895,
-   1.6132,
-   1.7083,
-   1.8301,
-   1.462
+   2.0962,
+   1.3052,
+   1.6209,
+   1.3484,
+   1.3283
   ],
-  "heldout_base": 2.2924,
-  "heldout_after": 1.7792,
-  "heldout_delta": -0.5132,
+  "heldout_base": 2.0099,
+  "heldout_after": 1.4808,
+  "heldout_delta": -0.5291,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 0.14,
+  "probe_sec": 0.18,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.114
+   "ratio_mean": 0.147
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.23
+   "ratio_mean": 0.163
   },
   "aligned": {
    "n": 8,
@@ -82,20 +82,20 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What is a TUI, and how does Spotatui\u2019s Text\u2011User\u2011Interface let users control ",
-    "exp": "ANSWER: A TUI (Text User Interface) is a program that runs in a terminal or console window and lets ",
-    "pred_before": " \n A: The text user interface (TUI) of Spotatui allows users to interact with Spotify in a more",
-    "pred_after": "ANSWER: A TUI (Text\u2011User\u2011Interface) is a graphical user interface that allows users to interact with"
+    "p": "Q: What was the purpose of the 1692 \u201cPre\u2011Pantone\u201d color guide, and how does it d",
+    "exp": "ANSWER: The 1692 guide\u2014often called a \u201cpre\u2011Pantone\u201d color reference because it predates the Pantone ",
+    "pred_before": " \nA: The 1692 \u201cPre-Pantone\u201d color guide was created in 189",
+    "pred_after": "ANSWER: The 1692 \u201cPre-Pantone\u201d color guide was a pioneering effort to standardize"
    },
    {
-    "p": "Q: What groundbreaking 3D graphics techniques did the Nintendo 64 hardware and i",
-    "exp": "ANSWER: The Nintendo 64 introduced several key technologies that made Super\u202fMario\u202f64 possible:",
-    "pred_before": " I'm trying to decide if there is more than one correct answer to this question. Can you tell me abo",
-    "pred_after": "ANSWER: The Nintendo 64 hardware and its development tools enabled the creation of Super Mario 64 by"
+    "p": "Q: What are agent sandboxes in the context of running agents, and how do they co",
+    "exp": "ANSWER: Agent sandboxes are isolated environments designed to run and test software agents, which ar",
+    "pred_before": " \nA: Agent sandboxes are a way for an agent to store its state while it is executing. They allow the",
+    "pred_after": "ANSWER: An agent sandbox is a container that holds an agent's state and allows it to run independent"
    }
   ]
  },
- "runtime_sec": 112.0,
+ "runtime_sec": 185.9,
  "cut_by_budget": false,
  "threads": 4,
  "machine": "x86_64"
