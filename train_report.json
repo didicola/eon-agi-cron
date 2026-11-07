@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-06T10:23:57.140264+00:00",
+ "ts": "2026-11-07T09:37:48.779226+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26110610,
-  "ts": "2026-11-06T10:20:51.233780+00:00"
+  "seed": 26110709,
+  "ts": "2026-11-07T09:35:46.205600+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,7 +29,7 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26110610
+  "seed": 26110709
  },
  "train": {
   "epochs": 1,
@@ -39,30 +39,30 @@
   "steps": 63
  },
  "loss": {
-  "mean_last": 1.6699,
+  "mean_last": 1.692,
   "first5": [
-   2.0757,
-   2.1622,
-   1.1406,
-   2.2089,
-   1.2441
+   2.8223,
+   1.8222,
+   1.5346,
+   1.8907,
+   2.3253
   ],
   "last5": [
-   2.0962,
-   1.3052,
-   1.6209,
-   1.3484,
-   1.3283
+   2.024,
+   1.2984,
+   1.7948,
+   2.0704,
+   1.3384
   ],
-  "heldout_base": 2.0099,
-  "heldout_after": 1.4808,
-  "heldout_delta": -0.5291,
+  "heldout_base": 2.2644,
+  "heldout_after": 1.7261,
+  "heldout_delta": -0.5383,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 0.18,
+  "probe_sec": 0.12,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
@@ -72,7 +72,7 @@
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.163
+   "ratio_mean": 0.248
   },
   "aligned": {
    "n": 8,
@@ -82,20 +82,20 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What was the purpose of the 1692 \u201cPre\u2011Pantone\u201d color guide, and how does it d",
-    "exp": "ANSWER: The 1692 guide\u2014often called a \u201cpre\u2011Pantone\u201d color reference because it predates the Pantone ",
-    "pred_before": " \nA: The 1692 \u201cPre-Pantone\u201d color guide was created in 189",
-    "pred_after": "ANSWER: The 1692 \u201cPre-Pantone\u201d color guide was a pioneering effort to standardize"
+    "p": "Q: How can a single company like Amazon influence prices across the entire Inter",
+    "exp": "ANSWER: Amazon can influence prices across the Internet through its pricing algorithms and massive m",
+    "pred_before": "  Answer the following question:\nHow does Amazon's pricing strategy work?\nA: By setting prices based",
+    "pred_after": "ANSWER: Amazon's pricing strategy is based on its own data and algorithms, which it uses to determin"
    },
    {
-    "p": "Q: What are agent sandboxes in the context of running agents, and how do they co",
-    "exp": "ANSWER: Agent sandboxes are isolated environments designed to run and test software agents, which ar",
-    "pred_before": " \nA: Agent sandboxes are a way for an agent to store its state while it is executing. They allow the",
-    "pred_after": "ANSWER: An agent sandbox is a container that holds an agent's state and allows it to run independent"
+    "p": "Q: How do single-celled organisms demonstrate complex problem\u2011solving abilities ",
+    "exp": "ANSWER: Recent research shows that single-celled organisms such as *Stentor* and certain amoebae can",
+    "pred_before": "  Answer the above question. If the question is unanswerable, provide answer with \"zero\".\nAnswer:\n\nS",
+    "pred_after": "ANSWER: Single\u2011cell organisms, such as bacteria and viruses, exhibit remarkable complexity in their "
    }
   ]
  },
- "runtime_sec": 185.9,
+ "runtime_sec": 122.6,
  "cut_by_budget": false,
  "threads": 4,
  "machine": "x86_64"
