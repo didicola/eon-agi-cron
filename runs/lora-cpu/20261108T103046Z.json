@@ -1,0 +1,102 @@
+{
+ "ts": "2026-11-08T10:30:43.245639+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26110809,
+  "ts": "2026-11-08T09:50:56.812666+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26110809
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 12
+ },
+ "loss": {
+  "mean_last": 1.8222,
+  "first5": [
+   2.124,
+   2.0385,
+   1.6886,
+   1.268,
+   1.8492
+  ],
+  "last5": [
+   1.8939,
+   2.0692,
+   1.526,
+   1.9173,
+   1.7357
+  ],
+  "heldout_base": 2.1613,
+  "heldout_after": 1.71,
+  "heldout_delta": -0.4513,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 3.16,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.185
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.26
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is the broad field of study that computer science is included in?",
+    "exp": "ANSWER: Computer science is included broadly in the sciences.",
+    "pred_before": "  A. programming languages  B. data structures  C. algorithms  D. hardware  E. internet  The",
+    "pred_after": "ANSWER: Computer science encompasses a wide range of disciplines, including but not limited to mathe"
+   },
+   {
+    "p": "Q: What are passkeys in the context of online security and authentication?",
+    "exp": "ANSWER: Passkeys are a type of authentication credential that uses public key cryptography to secure",
+    "pred_before": " \nA: Passkeys are a type of password that is used to authenticate users on websites. They are typica",
+    "pred_after": "ANSWER: Passkeys, also known as password tokens or digital keys, are a type of cryptographic key tha"
+   }
+  ]
+ },
+ "runtime_sec": 2386.4,
+ "cut_by_budget": true,
+ "threads": 4,
+ "machine": "x86_64"
+}

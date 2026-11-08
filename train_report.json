@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-07T09:37:48.779226+00:00",
+ "ts": "2026-11-08T10:30:43.245639+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26110709,
-  "ts": "2026-11-07T09:35:46.205600+00:00"
+  "seed": 26110809,
+  "ts": "2026-11-08T09:50:56.812666+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,50 +29,50 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26110709
+  "seed": 26110809
  },
  "train": {
   "epochs": 1,
   "batch": 2,
   "lr": 0.0002,
   "maxlen": 160,
-  "steps": 63
+  "steps": 12
  },
  "loss": {
-  "mean_last": 1.692,
+  "mean_last": 1.8222,
   "first5": [
-   2.8223,
-   1.8222,
-   1.5346,
-   1.8907,
-   2.3253
+   2.124,
+   2.0385,
+   1.6886,
+   1.268,
+   1.8492
   ],
   "last5": [
-   2.024,
-   1.2984,
-   1.7948,
-   2.0704,
-   1.3384
+   1.8939,
+   2.0692,
+   1.526,
+   1.9173,
+   1.7357
   ],
-  "heldout_base": 2.2644,
-  "heldout_after": 1.7261,
-  "heldout_delta": -0.5383,
+  "heldout_base": 2.1613,
+  "heldout_after": 1.71,
+  "heldout_delta": -0.4513,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 0.12,
+  "probe_sec": 3.16,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.147
+   "ratio_mean": 0.185
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.248
+   "ratio_mean": 0.26
   },
   "aligned": {
    "n": 8,
@@ -82,21 +82,21 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: How can a single company like Amazon influence prices across the entire Inter",
-    "exp": "ANSWER: Amazon can influence prices across the Internet through its pricing algorithms and massive m",
-    "pred_before": "  Answer the following question:\nHow does Amazon's pricing strategy work?\nA: By setting prices based",
-    "pred_after": "ANSWER: Amazon's pricing strategy is based on its own data and algorithms, which it uses to determin"
+    "p": "Q: What is the broad field of study that computer science is included in?",
+    "exp": "ANSWER: Computer science is included broadly in the sciences.",
+    "pred_before": "  A. programming languages  B. data structures  C. algorithms  D. hardware  E. internet  The",
+    "pred_after": "ANSWER: Computer science encompasses a wide range of disciplines, including but not limited to mathe"
    },
    {
-    "p": "Q: How do single-celled organisms demonstrate complex problem\u2011solving abilities ",
-    "exp": "ANSWER: Recent research shows that single-celled organisms such as *Stentor* and certain amoebae can",
-    "pred_before": "  Answer the above question. If the question is unanswerable, provide answer with \"zero\".\nAnswer:\n\nS",
-    "pred_after": "ANSWER: Single\u2011cell organisms, such as bacteria and viruses, exhibit remarkable complexity in their "
+    "p": "Q: What are passkeys in the context of online security and authentication?",
+    "exp": "ANSWER: Passkeys are a type of authentication credential that uses public key cryptography to secure",
+    "pred_before": " \nA: Passkeys are a type of password that is used to authenticate users on websites. They are typica",
+    "pred_after": "ANSWER: Passkeys, also known as password tokens or digital keys, are a type of cryptographic key tha"
    }
   ]
  },
- "runtime_sec": 122.6,
- "cut_by_budget": false,
+ "runtime_sec": 2386.4,
+ "cut_by_budget": true,
  "threads": 4,
  "machine": "x86_64"
 }
