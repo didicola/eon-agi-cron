@@ -1,0 +1,102 @@
+{
+ "ts": "2026-11-09T11:32:17.062555+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26110910,
+  "ts": "2026-11-09T10:52:24.886531+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26110910
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 10
+ },
+ "loss": {
+  "mean_last": 2.0316,
+  "first5": [
+   2.0787,
+   2.1916,
+   2.2609,
+   1.6681,
+   2.451
+  ],
+  "last5": [
+   2.3828,
+   2.1769,
+   1.8276,
+   1.4826,
+   1.796
+  ],
+  "heldout_base": 2.2502,
+  "heldout_after": 1.8517,
+  "heldout_delta": -0.3985,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 1.57,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.071
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.142
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is Hypermedia, and how is it relevant to a multiplayer game like the Gam",
+    "exp": "ANSWER: Hypermedia refers to a type of multimedia that includes links to other media, such as text, ",
+    "pred_before": " \nA: Hypermedia refers to a type of web page that allows users to navigate through pages by clicking",
+    "pred_after": "ANSWER: Hypermedia refers to a type of web-based content that allows users to navigate through a col"
+   },
+   {
+    "p": "Q: How can I use an OpenAI subscription to create audiobooks, and what are the m",
+    "exp": "ANSWER: By leveraging an active OpenAI subscription (e.g., ChatGPT\u202fPlus or an API plan that includes",
+    "pred_before": "\r\n\r\nA: To use an OpenAI subscription to create audiobooks, you will need to follow these steps:\r\n\r\n1",
+    "pred_after": "ANSWER: To use an OpenAI subscription for creating audiobooks, you will need to follow these general"
+   }
+  ]
+ },
+ "runtime_sec": 2392.2,
+ "cut_by_budget": true,
+ "threads": 4,
+ "machine": "x86_64"
+}
