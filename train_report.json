@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-09T11:32:17.062555+00:00",
+ "ts": "2026-11-10T10:48:45.674964+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26110910,
-  "ts": "2026-11-09T10:52:24.886531+00:00"
+  "seed": 26111010,
+  "ts": "2026-11-10T10:45:36.933091+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,50 +29,50 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26110910
+  "seed": 26111010
  },
  "train": {
   "epochs": 1,
   "batch": 2,
   "lr": 0.0002,
   "maxlen": 160,
-  "steps": 10
+  "steps": 63
  },
  "loss": {
-  "mean_last": 2.0316,
+  "mean_last": 1.7615,
   "first5": [
-   2.0787,
-   2.1916,
-   2.2609,
-   1.6681,
-   2.451
+   1.6933,
+   2.176,
+   1.5155,
+   1.9018,
+   1.4962
   ],
   "last5": [
-   2.3828,
-   2.1769,
-   1.8276,
-   1.4826,
-   1.796
+   1.381,
+   1.481,
+   1.1575,
+   1.8564,
+   1.5289
   ],
-  "heldout_base": 2.2502,
-  "heldout_after": 1.8517,
-  "heldout_delta": -0.3985,
+  "heldout_base": 1.907,
+  "heldout_after": 1.4982,
+  "heldout_delta": -0.4088,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 1.57,
+  "probe_sec": 0.18,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.071
+   "ratio_mean": 0.152
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.142
+   "ratio_mean": 0.219
   },
   "aligned": {
    "n": 8,
@@ -82,21 +82,21 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What is Hypermedia, and how is it relevant to a multiplayer game like the Gam",
-    "exp": "ANSWER: Hypermedia refers to a type of multimedia that includes links to other media, such as text, ",
-    "pred_before": " \nA: Hypermedia refers to a type of web page that allows users to navigate through pages by clicking",
-    "pred_after": "ANSWER: Hypermedia refers to a type of web-based content that allows users to navigate through a col"
+    "p": "Q: What is \"/dev/null\" in the context of the headline, and what does it refer to",
+    "exp": "ANSWER: In computing, \"/dev/null\" is a special file in Unix-like operating systems that discards any",
+    "pred_before": " \nA: The /dev/null device file is a special file that can be used as an output device for programs.",
+    "pred_after": "ANSWER: In computing, \"/dev/null\" refers to a special file that is used to discard or ignore data wr"
    },
    {
-    "p": "Q: How can I use an OpenAI subscription to create audiobooks, and what are the m",
-    "exp": "ANSWER: By leveraging an active OpenAI subscription (e.g., ChatGPT\u202fPlus or an API plan that includes",
-    "pred_before": "\r\n\r\nA: To use an OpenAI subscription to create audiobooks, you will need to follow these steps:\r\n\r\n1",
-    "pred_after": "ANSWER: To use an OpenAI subscription for creating audiobooks, you will need to follow these general"
+    "p": "Q: What is photonic computing, and how does it potentially improve CPU performan",
+    "exp": "ANSWER: Photonic computing is a technology that uses light (photons) to transfer data within a compu",
+    "pred_before": " \nA: Photonic computing uses light to transmit data between devices. This allows for faster processi",
+    "pred_after": "ANSWER: Photonic computing refers to the use of light as a medium for data transmission and processi"
    }
   ]
  },
- "runtime_sec": 2392.2,
- "cut_by_budget": true,
+ "runtime_sec": 188.7,
+ "cut_by_budget": false,
  "threads": 4,
  "machine": "x86_64"
 }
