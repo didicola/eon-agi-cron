@@ -1,0 +1,102 @@
+{
+ "ts": "2026-11-11T10:18:25.819931+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26111110,
+  "ts": "2026-11-11T10:16:20.701323+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26111110
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 63
+ },
+ "loss": {
+  "mean_last": 1.74,
+  "first5": [
+   1.7953,
+   3.0,
+   1.6376,
+   1.3747,
+   1.8899
+  ],
+  "last5": [
+   2.2097,
+   1.2954,
+   2.1005,
+   2.0202,
+   1.3094
+  ],
+  "heldout_base": 2.0544,
+  "heldout_after": 1.6545,
+  "heldout_delta": -0.3999,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 0.14,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.072
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.172
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is a rationalist blog post, and how does its length relate to the concep",
+    "exp": "ANSWER: A rationalist blog post refers to a type of online article that presents detailed, logical, ",
+    "pred_before": " A: The term \"rationalist\" refers to someone who believes that reason or logic should be used in dec",
+    "pred_after": "ANSWER: A rationalist blog post is a type of content that presents arguments or perspectives on a to"
+   },
+   {
+    "p": "Q: How do quantum computers differ from classical computers in the way they proc",
+    "exp": "ANSWER: Quantum computers process information using quantum states rather than binary bits. They exp",
+    "pred_before": " \nA: Quantum computers are able to perform certain calculations much faster than classical computers",
+    "pred_after": "ANSWER: Quantum computers are fundamentally different from classical computers because they use quan"
+   }
+  ]
+ },
+ "runtime_sec": 125.1,
+ "cut_by_budget": false,
+ "threads": 4,
+ "machine": "x86_64"
+}

@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-10T10:48:45.674964+00:00",
+ "ts": "2026-11-11T10:18:25.819931+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26111010,
-  "ts": "2026-11-10T10:45:36.933091+00:00"
+  "seed": 26111110,
+  "ts": "2026-11-11T10:16:20.701323+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,7 +29,7 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26111010
+  "seed": 26111110
  },
  "train": {
   "epochs": 1,
@@ -39,40 +39,40 @@
   "steps": 63
  },
  "loss": {
-  "mean_last": 1.7615,
+  "mean_last": 1.74,
   "first5": [
-   1.6933,
-   2.176,
-   1.5155,
-   1.9018,
-   1.4962
+   1.7953,
+   3.0,
+   1.6376,
+   1.3747,
+   1.8899
   ],
   "last5": [
-   1.381,
-   1.481,
-   1.1575,
-   1.8564,
-   1.5289
+   2.2097,
+   1.2954,
+   2.1005,
+   2.0202,
+   1.3094
   ],
-  "heldout_base": 1.907,
-  "heldout_after": 1.4982,
-  "heldout_delta": -0.4088,
+  "heldout_base": 2.0544,
+  "heldout_after": 1.6545,
+  "heldout_delta": -0.3999,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 0.18,
+  "probe_sec": 0.14,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.152
+   "ratio_mean": 0.072
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.219
+   "ratio_mean": 0.172
   },
   "aligned": {
    "n": 8,
@@ -82,20 +82,20 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What is \"/dev/null\" in the context of the headline, and what does it refer to",
-    "exp": "ANSWER: In computing, \"/dev/null\" is a special file in Unix-like operating systems that discards any",
-    "pred_before": " \nA: The /dev/null device file is a special file that can be used as an output device for programs.",
-    "pred_after": "ANSWER: In computing, \"/dev/null\" refers to a special file that is used to discard or ignore data wr"
+    "p": "Q: What is a rationalist blog post, and how does its length relate to the concep",
+    "exp": "ANSWER: A rationalist blog post refers to a type of online article that presents detailed, logical, ",
+    "pred_before": " A: The term \"rationalist\" refers to someone who believes that reason or logic should be used in dec",
+    "pred_after": "ANSWER: A rationalist blog post is a type of content that presents arguments or perspectives on a to"
    },
    {
-    "p": "Q: What is photonic computing, and how does it potentially improve CPU performan",
-    "exp": "ANSWER: Photonic computing is a technology that uses light (photons) to transfer data within a compu",
-    "pred_before": " \nA: Photonic computing uses light to transmit data between devices. This allows for faster processi",
-    "pred_after": "ANSWER: Photonic computing refers to the use of light as a medium for data transmission and processi"
+    "p": "Q: How do quantum computers differ from classical computers in the way they proc",
+    "exp": "ANSWER: Quantum computers process information using quantum states rather than binary bits. They exp",
+    "pred_before": " \nA: Quantum computers are able to perform certain calculations much faster than classical computers",
+    "pred_after": "ANSWER: Quantum computers are fundamentally different from classical computers because they use quan"
    }
   ]
  },
- "runtime_sec": 188.7,
+ "runtime_sec": 125.1,
  "cut_by_budget": false,
  "threads": 4,
  "machine": "x86_64"
