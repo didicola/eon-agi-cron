@@ -1,0 +1,102 @@
+{
+ "ts": "2026-11-12T10:39:25.515414+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26111210,
+  "ts": "2026-11-12T10:37:19.440670+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26111210
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 63
+ },
+ "loss": {
+  "mean_last": 1.6727,
+  "first5": [
+   2.5539,
+   1.7502,
+   2.0731,
+   1.6347,
+   2.3671
+  ],
+  "last5": [
+   1.7784,
+   1.7692,
+   1.4972,
+   1.4968,
+   1.6164
+  ],
+  "heldout_base": 2.2797,
+  "heldout_after": 1.7888,
+  "heldout_delta": -0.4909,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 0.12,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.095
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.129
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is genealogy in the context of technology, as possibly referenced in the",
+    "exp": "ANSWER: In the context of technology, genealogy refers to the study of the origins, evolution, and r",
+    "pred_before": "  Answer:\nA:\n\ngenealogy refers to the study of one's family history and ancestry. In the context of ",
+    "pred_after": "ANSWER: Genealogy refers to the study and research of family history, including tracing ancestors ba"
+   },
+   {
+    "p": "Q: How were blood cells from an 80\u2011year\u2011old donor reprogrammed into stem cells t",
+    "exp": "ANSWER: Researchers took peripheral blood mononuclear cells from an 80\u2011year\u2011old donor and introduced",
+    "pred_before": " \n A: The process involved the use of a gene called Oct4. This gene is expressed in all somatic (",
+    "pred_after": "ANSWER: The process of reprogramming blood cells was achieved by using the gene editing technology C"
+   }
+  ]
+ },
+ "runtime_sec": 126.1,
+ "cut_by_budget": false,
+ "threads": 4,
+ "machine": "x86_64"
+}

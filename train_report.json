@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-11T10:18:25.819931+00:00",
+ "ts": "2026-11-12T10:39:25.515414+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26111110,
-  "ts": "2026-11-11T10:16:20.701323+00:00"
+  "seed": 26111210,
+  "ts": "2026-11-12T10:37:19.440670+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,7 +29,7 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26111110
+  "seed": 26111210
  },
  "train": {
   "epochs": 1,
@@ -39,40 +39,40 @@
   "steps": 63
  },
  "loss": {
-  "mean_last": 1.74,
+  "mean_last": 1.6727,
   "first5": [
-   1.7953,
-   3.0,
-   1.6376,
-   1.3747,
-   1.8899
+   2.5539,
+   1.7502,
+   2.0731,
+   1.6347,
+   2.3671
   ],
   "last5": [
-   2.2097,
-   1.2954,
-   2.1005,
-   2.0202,
-   1.3094
+   1.7784,
+   1.7692,
+   1.4972,
+   1.4968,
+   1.6164
   ],
-  "heldout_base": 2.0544,
-  "heldout_after": 1.6545,
-  "heldout_delta": -0.3999,
+  "heldout_base": 2.2797,
+  "heldout_after": 1.7888,
+  "heldout_delta": -0.4909,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 0.14,
+  "probe_sec": 0.12,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.072
+   "ratio_mean": 0.095
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.172
+   "ratio_mean": 0.129
   },
   "aligned": {
    "n": 8,
@@ -82,20 +82,20 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What is a rationalist blog post, and how does its length relate to the concep",
-    "exp": "ANSWER: A rationalist blog post refers to a type of online article that presents detailed, logical, ",
-    "pred_before": " A: The term \"rationalist\" refers to someone who believes that reason or logic should be used in dec",
-    "pred_after": "ANSWER: A rationalist blog post is a type of content that presents arguments or perspectives on a to"
+    "p": "Q: What is genealogy in the context of technology, as possibly referenced in the",
+    "exp": "ANSWER: In the context of technology, genealogy refers to the study of the origins, evolution, and r",
+    "pred_before": "  Answer:\nA:\n\ngenealogy refers to the study of one's family history and ancestry. In the context of ",
+    "pred_after": "ANSWER: Genealogy refers to the study and research of family history, including tracing ancestors ba"
    },
    {
-    "p": "Q: How do quantum computers differ from classical computers in the way they proc",
-    "exp": "ANSWER: Quantum computers process information using quantum states rather than binary bits. They exp",
-    "pred_before": " \nA: Quantum computers are able to perform certain calculations much faster than classical computers",
-    "pred_after": "ANSWER: Quantum computers are fundamentally different from classical computers because they use quan"
+    "p": "Q: How were blood cells from an 80\u2011year\u2011old donor reprogrammed into stem cells t",
+    "exp": "ANSWER: Researchers took peripheral blood mononuclear cells from an 80\u2011year\u2011old donor and introduced",
+    "pred_before": " \n A: The process involved the use of a gene called Oct4. This gene is expressed in all somatic (",
+    "pred_after": "ANSWER: The process of reprogramming blood cells was achieved by using the gene editing technology C"
    }
   ]
  },
- "runtime_sec": 125.1,
+ "runtime_sec": 126.1,
  "cut_by_budget": false,
  "threads": 4,
  "machine": "x86_64"
