@@ -1,0 +1,102 @@
+{
+ "ts": "2026-11-14T10:24:22.054442+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26111409,
+  "ts": "2026-11-14T09:47:38.502383+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26111409
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 9
+ },
+ "loss": {
+  "mean_last": 1.7126,
+  "first5": [
+   2.0919,
+   2.6682,
+   1.8624,
+   1.4556,
+   1.1645
+  ],
+  "last5": [
+   1.1645,
+   1.2705,
+   1.6211,
+   1.514,
+   1.7649
+  ],
+  "heldout_base": 2.108,
+  "heldout_after": 1.6884,
+  "heldout_delta": -0.4196,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 1.92,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.099
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.165
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What are the key programming techniques used to create a demoscene intro on t",
+    "exp": "ANSWER: A ZX Spectrum demoscene intro typically relies on a few core techniques to squeeze impressiv",
+    "pred_before": " \nA: The main technique is to use a loop that repeats itself. This allows you to have a continuous l",
+    "pred_after": "ANSWER: The key programming techniques used in creating a demoscene intro for the ZX Spectrum includ"
+   },
+   {
+    "p": "Q: What is a skeuomorphic design in the context of user interfaces like the Wayl",
+    "exp": "ANSWER: A skeuomorphic design is an interface design approach that incorporates visual elements and ",
+    "pred_before": " A:\n\nSkeuomorphism refers to the process of creating an interface that looks and behaves as if it we",
+    "pred_after": "ANSWER: A skeuomorphic design refers to creating an interface that looks and feels similar to tradit"
+   }
+  ]
+ },
+ "runtime_sec": 2203.6,
+ "cut_by_budget": true,
+ "threads": 4,
+ "machine": "x86_64"
+}
