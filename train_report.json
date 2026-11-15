@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-14T10:24:22.054442+00:00",
+ "ts": "2026-11-15T10:24:54.438543+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26111409,
-  "ts": "2026-11-14T09:47:38.502383+00:00"
+  "seed": 26111510,
+  "ts": "2026-11-15T10:21:40.779985+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,50 +29,50 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26111409
+  "seed": 26111510
  },
  "train": {
   "epochs": 1,
   "batch": 2,
   "lr": 0.0002,
   "maxlen": 160,
-  "steps": 9
+  "steps": 63
  },
  "loss": {
-  "mean_last": 1.7126,
+  "mean_last": 1.7356,
   "first5": [
-   2.0919,
-   2.6682,
-   1.8624,
-   1.4556,
-   1.1645
+   1.7485,
+   2.0275,
+   2.3218,
+   2.3412,
+   1.6389
   ],
   "last5": [
-   1.1645,
-   1.2705,
-   1.6211,
-   1.514,
-   1.7649
+   2.214,
+   1.7858,
+   1.9745,
+   1.5338,
+   2.3485
   ],
-  "heldout_base": 2.108,
-  "heldout_after": 1.6884,
-  "heldout_delta": -0.4196,
+  "heldout_base": 2.262,
+  "heldout_after": 1.7282,
+  "heldout_delta": -0.5338,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 1.92,
+  "probe_sec": 0.2,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.099
+   "ratio_mean": 0.148
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.165
+   "ratio_mean": 0.251
   },
   "aligned": {
    "n": 8,
@@ -82,21 +82,21 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What are the key programming techniques used to create a demoscene intro on t",
-    "exp": "ANSWER: A ZX Spectrum demoscene intro typically relies on a few core techniques to squeeze impressiv",
-    "pred_before": " \nA: The main technique is to use a loop that repeats itself. This allows you to have a continuous l",
-    "pred_after": "ANSWER: The key programming techniques used in creating a demoscene intro for the ZX Spectrum includ"
+    "p": "Q: What is a Futuro House, as referenced in the Donaldson Futuro House in Idyllw",
+    "exp": "ANSWER: A Futuro House is a type of prefabricated, flying saucer-shaped home designed by Finnish arc",
+    "pred_before": " I'm sorry, but your question does not provide enough context to answer it accurately. The Futuro Ho",
+    "pred_after": "ANSWER: A Futuro House is a concept house that aims to be a living laboratory for sustainable and ec"
    },
    {
-    "p": "Q: What is a skeuomorphic design in the context of user interfaces like the Wayl",
-    "exp": "ANSWER: A skeuomorphic design is an interface design approach that incorporates visual elements and ",
-    "pred_before": " A:\n\nSkeuomorphism refers to the process of creating an interface that looks and behaves as if it we",
-    "pred_after": "ANSWER: A skeuomorphic design refers to creating an interface that looks and feels similar to tradit"
+    "p": "Q: What is pgvector's IVFFlat and HNSW, and how do they relate to indexing in da",
+    "exp": "ANSWER: IVFFlat and HNSW are indexing algorithms used in pgvector, a PostgreSQL extension for vector",
+    "pred_before": " A:\n\nPGVector is a vector database that uses an index to provide fast access to the data. The IVF (",
+    "pred_after": "ANSWER: PGVector's IVFFlat and HNSW are two different types of vector storage formats used for stori"
    }
   ]
  },
- "runtime_sec": 2203.6,
- "cut_by_budget": true,
+ "runtime_sec": 193.7,
+ "cut_by_budget": false,
  "threads": 4,
  "machine": "x86_64"
 }

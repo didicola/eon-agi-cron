@@ -1,0 +1,102 @@
+{
+ "ts": "2026-11-15T10:24:54.438543+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26111510,
+  "ts": "2026-11-15T10:21:40.779985+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26111510
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 63
+ },
+ "loss": {
+  "mean_last": 1.7356,
+  "first5": [
+   1.7485,
+   2.0275,
+   2.3218,
+   2.3412,
+   1.6389
+  ],
+  "last5": [
+   2.214,
+   1.7858,
+   1.9745,
+   1.5338,
+   2.3485
+  ],
+  "heldout_base": 2.262,
+  "heldout_after": 1.7282,
+  "heldout_delta": -0.5338,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 0.2,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.148
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.251
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is a Futuro House, as referenced in the Donaldson Futuro House in Idyllw",
+    "exp": "ANSWER: A Futuro House is a type of prefabricated, flying saucer-shaped home designed by Finnish arc",
+    "pred_before": " I'm sorry, but your question does not provide enough context to answer it accurately. The Futuro Ho",
+    "pred_after": "ANSWER: A Futuro House is a concept house that aims to be a living laboratory for sustainable and ec"
+   },
+   {
+    "p": "Q: What is pgvector's IVFFlat and HNSW, and how do they relate to indexing in da",
+    "exp": "ANSWER: IVFFlat and HNSW are indexing algorithms used in pgvector, a PostgreSQL extension for vector",
+    "pred_before": " A:\n\nPGVector is a vector database that uses an index to provide fast access to the data. The IVF (",
+    "pred_after": "ANSWER: PGVector's IVFFlat and HNSW are two different types of vector storage formats used for stori"
+   }
+  ]
+ },
+ "runtime_sec": 193.7,
+ "cut_by_budget": false,
+ "threads": 4,
+ "machine": "x86_64"
+}
