@@ -1,0 +1,102 @@
+{
+ "ts": "2026-11-16T11:15:09.593678+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26111610,
+  "ts": "2026-11-16T10:36:22.749239+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26111610
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 12
+ },
+ "loss": {
+  "mean_last": 2.0107,
+  "first5": [
+   2.1745,
+   2.1602,
+   2.1577,
+   1.809,
+   1.9692
+  ],
+  "last5": [
+   1.5259,
+   1.6752,
+   2.104,
+   2.9746,
+   1.7542
+  ],
+  "heldout_base": 2.4006,
+  "heldout_after": 1.9558,
+  "heldout_delta": -0.4448,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 1.68,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.133
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.25
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is Playgrnd, and what kind of projects is it designed to support?",
+    "exp": "ANSWER: Playgrnd is a collection of tiny tools that enable users to create unusual and aesthetically",
+    "pred_before": " Answer in one sentence.\nA: Playground is a platform that supports the development of educational ga",
+    "pred_after": "ANSWER: Playground is a platform that supports the development of educational games for children age"
+   },
+   {
+    "p": "Q: What is UTC in the context of technology and timekeeping?",
+    "exp": "ANSWER: UTC stands for Coordinated Universal Time, which is the primary time standard used in modern",
+    "pred_before": "   A:\nThe answer is \"Coordinated Universal Time\" (UTC). UTC stands for Coordinated Universal Time, w",
+    "pred_after": "ANSWER: UTC stands for Coordinated Universal Time, a standardized timekeeping system used by most co"
+   }
+  ]
+ },
+ "runtime_sec": 2326.8,
+ "cut_by_budget": true,
+ "threads": 4,
+ "machine": "x86_64"
+}

@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-15T10:24:54.438543+00:00",
+ "ts": "2026-11-16T11:15:09.593678+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26111510,
-  "ts": "2026-11-15T10:21:40.779985+00:00"
+  "seed": 26111610,
+  "ts": "2026-11-16T10:36:22.749239+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,50 +29,50 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26111510
+  "seed": 26111610
  },
  "train": {
   "epochs": 1,
   "batch": 2,
   "lr": 0.0002,
   "maxlen": 160,
-  "steps": 63
+  "steps": 12
  },
  "loss": {
-  "mean_last": 1.7356,
+  "mean_last": 2.0107,
   "first5": [
-   1.7485,
-   2.0275,
-   2.3218,
-   2.3412,
-   1.6389
+   2.1745,
+   2.1602,
+   2.1577,
+   1.809,
+   1.9692
   ],
   "last5": [
-   2.214,
-   1.7858,
-   1.9745,
-   1.5338,
-   2.3485
+   1.5259,
+   1.6752,
+   2.104,
+   2.9746,
+   1.7542
   ],
-  "heldout_base": 2.262,
-  "heldout_after": 1.7282,
-  "heldout_delta": -0.5338,
+  "heldout_base": 2.4006,
+  "heldout_after": 1.9558,
+  "heldout_delta": -0.4448,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 0.2,
+  "probe_sec": 1.68,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.148
+   "ratio_mean": 0.133
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.251
+   "ratio_mean": 0.25
   },
   "aligned": {
    "n": 8,
@@ -82,21 +82,21 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What is a Futuro House, as referenced in the Donaldson Futuro House in Idyllw",
-    "exp": "ANSWER: A Futuro House is a type of prefabricated, flying saucer-shaped home designed by Finnish arc",
-    "pred_before": " I'm sorry, but your question does not provide enough context to answer it accurately. The Futuro Ho",
-    "pred_after": "ANSWER: A Futuro House is a concept house that aims to be a living laboratory for sustainable and ec"
+    "p": "Q: What is Playgrnd, and what kind of projects is it designed to support?",
+    "exp": "ANSWER: Playgrnd is a collection of tiny tools that enable users to create unusual and aesthetically",
+    "pred_before": " Answer in one sentence.\nA: Playground is a platform that supports the development of educational ga",
+    "pred_after": "ANSWER: Playground is a platform that supports the development of educational games for children age"
    },
    {
-    "p": "Q: What is pgvector's IVFFlat and HNSW, and how do they relate to indexing in da",
-    "exp": "ANSWER: IVFFlat and HNSW are indexing algorithms used in pgvector, a PostgreSQL extension for vector",
-    "pred_before": " A:\n\nPGVector is a vector database that uses an index to provide fast access to the data. The IVF (",
-    "pred_after": "ANSWER: PGVector's IVFFlat and HNSW are two different types of vector storage formats used for stori"
+    "p": "Q: What is UTC in the context of technology and timekeeping?",
+    "exp": "ANSWER: UTC stands for Coordinated Universal Time, which is the primary time standard used in modern",
+    "pred_before": "   A:\nThe answer is \"Coordinated Universal Time\" (UTC). UTC stands for Coordinated Universal Time, w",
+    "pred_after": "ANSWER: UTC stands for Coordinated Universal Time, a standardized timekeeping system used by most co"
    }
   ]
  },
- "runtime_sec": 193.7,
- "cut_by_budget": false,
+ "runtime_sec": 2326.8,
+ "cut_by_budget": true,
  "threads": 4,
  "machine": "x86_64"
 }
