@@ -1,0 +1,102 @@
+{
+ "ts": "2026-11-18T11:43:15.444750+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26111811,
+  "ts": "2026-11-18T11:04:08.122497+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26111811
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 11
+ },
+ "loss": {
+  "mean_last": 2.0924,
+  "first5": [
+   1.854,
+   2.4287,
+   2.7133,
+   2.1358,
+   2.1886
+  ],
+  "last5": [
+   1.4947,
+   1.4414,
+   2.3817,
+   1.9295,
+   2.3522
+  ],
+  "heldout_base": 2.0271,
+  "heldout_after": 1.574,
+  "heldout_delta": -0.4531,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 1.42,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.235
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.292
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is the broad field of study that computer science is included in?",
+    "exp": "ANSWER: Computer science is included broadly in the sciences.",
+    "pred_before": "  A. programming languages  B. data structures  C. algorithms  D. hardware  E. internet  The",
+    "pred_after": "ANSWER: Computer Science encompasses a wide range of disciplines, including but not limited to:\n\n1. "
+   },
+   {
+    "p": "What does an operating system (OS) do for computer programs?",
+    "exp": "ANSWER: An operating system is system software that manages computer hardware and software resources",
+    "pred_before": " An operating system (OS) is a software program that manages the hardware resources of a computer, s",
+    "pred_after": "ANSWER: An operating system (OS) is a software program that manages and controls the hardware resour"
+   }
+  ]
+ },
+ "runtime_sec": 2347.3,
+ "cut_by_budget": true,
+ "threads": 4,
+ "machine": "x86_64"
+}
