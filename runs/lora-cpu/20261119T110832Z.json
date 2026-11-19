@@ -1,0 +1,102 @@
+{
+ "ts": "2026-11-19T11:08:28.915011+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26111911,
+  "ts": "2026-11-19T11:05:10.169162+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26111911
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 63
+ },
+ "loss": {
+  "mean_last": 1.8071,
+  "first5": [
+   2.5676,
+   2.1614,
+   1.4903,
+   1.577,
+   1.7454
+  ],
+  "last5": [
+   1.6777,
+   1.2231,
+   1.9902,
+   2.2098,
+   1.5063
+  ],
+  "heldout_base": 1.9948,
+  "heldout_after": 1.4024,
+  "heldout_delta": -0.5924,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 0.2,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.219
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.324
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is the key difference between a data structure and an abstract data type",
+    "exp": "ANSWER: A data structure is the **physical implementation** of a data type\u2014it specifies how data is ",
+    "pred_before": " \nA: A data structure is a way of organizing data, while an ADT is a set of rules for manipulating",
+    "pred_after": "ANSWER: A data structure is a concrete implementation of a data type, while an abstract data type (A"
+   },
+   {
+    "p": "Q: What is the \u201cJTAG/RGH\u201d exploit used to hack an Xbox\u202f360, and how does it enab",
+    "exp": "ANSWER: The JTAG (Joint Test Action Group) and RGH (Reset Glitch Hack) are hardware\u2011based exploits t",
+    "pred_before": " \nA: The JTAG/RGH exploit was a vulnerability in the Xbox 360\u2019s serial communication protocol that",
+    "pred_after": "ANSWER: The \u201cJTAG/RGH\u201d exploit uses a technique called JTAG (Joint Test Action Group) to"
+   }
+  ]
+ },
+ "runtime_sec": 198.7,
+ "cut_by_budget": false,
+ "threads": 4,
+ "machine": "x86_64"
+}
