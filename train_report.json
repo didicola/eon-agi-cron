@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-19T11:08:28.915011+00:00",
+ "ts": "2026-11-20T10:54:57.363062+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26111911,
-  "ts": "2026-11-19T11:05:10.169162+00:00"
+  "seed": 26112010,
+  "ts": "2026-11-20T10:53:02.914296+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,7 +29,7 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26111911
+  "seed": 26112010
  },
  "train": {
   "epochs": 1,
@@ -39,40 +39,40 @@
   "steps": 63
  },
  "loss": {
-  "mean_last": 1.8071,
+  "mean_last": 1.7265,
   "first5": [
-   2.5676,
-   2.1614,
-   1.4903,
-   1.577,
-   1.7454
+   2.1936,
+   2.1428,
+   1.5452,
+   1.9006,
+   2.1939
   ],
   "last5": [
-   1.6777,
-   1.2231,
-   1.9902,
-   2.2098,
-   1.5063
+   1.2796,
+   1.2874,
+   1.4771,
+   1.7269,
+   1.4847
   ],
-  "heldout_base": 1.9948,
-  "heldout_after": 1.4024,
-  "heldout_delta": -0.5924,
+  "heldout_base": 2.2531,
+  "heldout_after": 1.7409,
+  "heldout_delta": -0.5122,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 0.2,
+  "probe_sec": 0.11,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.219
+   "ratio_mean": 0.057
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.324
+   "ratio_mean": 0.216
   },
   "aligned": {
    "n": 8,
@@ -82,20 +82,20 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What is the key difference between a data structure and an abstract data type",
-    "exp": "ANSWER: A data structure is the **physical implementation** of a data type\u2014it specifies how data is ",
-    "pred_before": " \nA: A data structure is a way of organizing data, while an ADT is a set of rules for manipulating",
-    "pred_after": "ANSWER: A data structure is a concrete implementation of a data type, while an abstract data type (A"
+    "p": "Q: What features of Python contribute to its emphasis on code readability and ea",
+    "exp": "ANSWER: Python promotes readability and ease of writing through its use of significant indentation t",
+    "pred_before": " I'm not sure what the correct answer is. Can you help me understand?\nA: The Python programming lang",
+    "pred_after": "ANSWER: Python's design philosophy emphasizes code readability, which is achieved through several ke"
    },
    {
-    "p": "Q: What is the \u201cJTAG/RGH\u201d exploit used to hack an Xbox\u202f360, and how does it enab",
-    "exp": "ANSWER: The JTAG (Joint Test Action Group) and RGH (Reset Glitch Hack) are hardware\u2011based exploits t",
-    "pred_before": " \nA: The JTAG/RGH exploit was a vulnerability in the Xbox 360\u2019s serial communication protocol that",
-    "pred_after": "ANSWER: The \u201cJTAG/RGH\u201d exploit uses a technique called JTAG (Joint Test Action Group) to"
+    "p": "Q: What is a multiplayer brick-building world in the context of online gaming an",
+    "exp": "ANSWER: A multiplayer brick-building world refers to a virtual environment where multiple users can ",
+    "pred_before": "  Answer the above question for the following game: Minecraft\nA:\n\nMinecraft is a multiplayer brick-b",
+    "pred_after": "ANSWER: A multiplayer brick-building world refers to an online game where players can build and deco"
    }
   ]
  },
- "runtime_sec": 198.7,
+ "runtime_sec": 114.4,
  "cut_by_budget": false,
  "threads": 4,
  "machine": "x86_64"
