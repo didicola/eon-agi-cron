@@ -1,0 +1,102 @@
+{
+ "ts": "2026-11-21T10:39:38.206653+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26112110,
+  "ts": "2026-11-21T10:37:45.283783+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26112110
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 63
+ },
+ "loss": {
+  "mean_last": 1.6909,
+  "first5": [
+   2.5693,
+   2.4187,
+   2.0185,
+   2.0912,
+   1.3691
+  ],
+  "last5": [
+   2.0187,
+   1.3301,
+   1.8654,
+   0.9087,
+   1.684
+  ],
+  "heldout_base": 2.2117,
+  "heldout_after": 1.6221,
+  "heldout_delta": -0.5896,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 0.15,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.226
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.324
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is the implication of using the \"wrong\" dictionary in the context of dig",
+    "exp": "ANSWER: The implication is that many people are likely relying on outdated or inaccurate digital dic",
+    "pred_before": " \nA: The implication is that you are likely not using a correct or reliable dictionary. This could b",
+    "pred_after": "ANSWER: The implication is that the use of a non-standard or incorrect dictionary can lead to confus"
+   },
+   {
+    "p": "Q: What is \"scraping\" in the context of websites, as mentioned in the headline a",
+    "exp": "ANSWER: In the context of websites, \"scraping\" refers to the act of automatically extracting data or",
+    "pred_before": " \nA:\n\nScraping refers to the act of obtaining information from a website without permission. In the ",
+    "pred_after": "ANSWER: Scraping refers to the process of extracting data from a website or web application without "
+   }
+  ]
+ },
+ "runtime_sec": 112.9,
+ "cut_by_budget": false,
+ "threads": 4,
+ "machine": "x86_64"
+}

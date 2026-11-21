@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-20T10:54:57.363062+00:00",
+ "ts": "2026-11-21T10:39:38.206653+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26112010,
-  "ts": "2026-11-20T10:53:02.914296+00:00"
+  "seed": 26112110,
+  "ts": "2026-11-21T10:37:45.283783+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,7 +29,7 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26112010
+  "seed": 26112110
  },
  "train": {
   "epochs": 1,
@@ -39,40 +39,40 @@
   "steps": 63
  },
  "loss": {
-  "mean_last": 1.7265,
+  "mean_last": 1.6909,
   "first5": [
-   2.1936,
-   2.1428,
-   1.5452,
-   1.9006,
-   2.1939
+   2.5693,
+   2.4187,
+   2.0185,
+   2.0912,
+   1.3691
   ],
   "last5": [
-   1.2796,
-   1.2874,
-   1.4771,
-   1.7269,
-   1.4847
+   2.0187,
+   1.3301,
+   1.8654,
+   0.9087,
+   1.684
   ],
-  "heldout_base": 2.2531,
-  "heldout_after": 1.7409,
-  "heldout_delta": -0.5122,
+  "heldout_base": 2.2117,
+  "heldout_after": 1.6221,
+  "heldout_delta": -0.5896,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 0.11,
+  "probe_sec": 0.15,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.057
+   "ratio_mean": 0.226
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.216
+   "ratio_mean": 0.324
   },
   "aligned": {
    "n": 8,
@@ -82,20 +82,20 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What features of Python contribute to its emphasis on code readability and ea",
-    "exp": "ANSWER: Python promotes readability and ease of writing through its use of significant indentation t",
-    "pred_before": " I'm not sure what the correct answer is. Can you help me understand?\nA: The Python programming lang",
-    "pred_after": "ANSWER: Python's design philosophy emphasizes code readability, which is achieved through several ke"
+    "p": "Q: What is the implication of using the \"wrong\" dictionary in the context of dig",
+    "exp": "ANSWER: The implication is that many people are likely relying on outdated or inaccurate digital dic",
+    "pred_before": " \nA: The implication is that you are likely not using a correct or reliable dictionary. This could b",
+    "pred_after": "ANSWER: The implication is that the use of a non-standard or incorrect dictionary can lead to confus"
    },
    {
-    "p": "Q: What is a multiplayer brick-building world in the context of online gaming an",
-    "exp": "ANSWER: A multiplayer brick-building world refers to a virtual environment where multiple users can ",
-    "pred_before": "  Answer the above question for the following game: Minecraft\nA:\n\nMinecraft is a multiplayer brick-b",
-    "pred_after": "ANSWER: A multiplayer brick-building world refers to an online game where players can build and deco"
+    "p": "Q: What is \"scraping\" in the context of websites, as mentioned in the headline a",
+    "exp": "ANSWER: In the context of websites, \"scraping\" refers to the act of automatically extracting data or",
+    "pred_before": " \nA:\n\nScraping refers to the act of obtaining information from a website without permission. In the ",
+    "pred_after": "ANSWER: Scraping refers to the process of extracting data from a website or web application without "
    }
   ]
  },
- "runtime_sec": 114.4,
+ "runtime_sec": 112.9,
  "cut_by_budget": false,
  "threads": 4,
  "machine": "x86_64"
