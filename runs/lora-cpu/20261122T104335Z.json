@@ -1,0 +1,102 @@
+{
+ "ts": "2026-11-22T10:43:31.847904+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26112210,
+  "ts": "2026-11-22T10:40:48.962602+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26112210
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 63
+ },
+ "loss": {
+  "mean_last": 1.809,
+  "first5": [
+   3.0689,
+   1.3543,
+   1.5616,
+   1.5801,
+   2.3594
+  ],
+  "last5": [
+   1.6039,
+   2.3037,
+   1.7009,
+   0.7586,
+   1.4008
+  ],
+  "heldout_base": 2.0493,
+  "heldout_after": 1.5209,
+  "heldout_delta": -0.5284,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 0.19,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.1
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.187
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is the main goal of the Simons Foundation's $15M effort in relation to m",
+    "exp": "ANSWER: The main goal of the Simons Foundation's $15M effort is to support mathematicians in navigat",
+    "pred_before": "  Answer:\nA:\n\nThe main goal of the Simons Foundation's $15 million effort in relation to mathematici",
+    "pred_after": "ANSWER: The Simons Foundation\u2019s $15 million grant aims to support research into mathematical models "
+   },
+   {
+    "p": "Q: What is DNA analysis, and how can it be used to study ancient populations?",
+    "exp": "ANSWER: DNA analysis is the process of examining an organism's genetic material to understand its ch",
+    "pred_before": "  A. genetic information  B. fossil fuels  C. human anatomy  D. climate change  E. weather",
+    "pred_after": "ANSWER: DNA analysis refers to the process of extracting genetic material from a sample (such as a f"
+   }
+  ]
+ },
+ "runtime_sec": 162.9,
+ "cut_by_budget": false,
+ "threads": 4,
+ "machine": "x86_64"
+}
