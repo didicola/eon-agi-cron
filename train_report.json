@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-22T10:43:31.847904+00:00",
+ "ts": "2026-11-23T12:24:20.944244+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26112210,
-  "ts": "2026-11-22T10:40:48.962602+00:00"
+  "seed": 26112311,
+  "ts": "2026-11-23T11:44:45.869046+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,50 +29,50 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26112210
+  "seed": 26112311
  },
  "train": {
   "epochs": 1,
   "batch": 2,
   "lr": 0.0002,
   "maxlen": 160,
-  "steps": 63
+  "steps": 10
  },
  "loss": {
-  "mean_last": 1.809,
+  "mean_last": 1.9341,
   "first5": [
-   3.0689,
-   1.3543,
-   1.5616,
-   1.5801,
-   2.3594
+   1.7557,
+   2.0793,
+   2.6284,
+   1.8481,
+   1.8632
   ],
   "last5": [
-   1.6039,
-   2.3037,
-   1.7009,
-   0.7586,
-   1.4008
+   1.4178,
+   1.3989,
+   2.3262,
+   2.0688,
+   1.9541
   ],
-  "heldout_base": 2.0493,
-  "heldout_after": 1.5209,
-  "heldout_delta": -0.5284,
+  "heldout_base": 2.3707,
+  "heldout_after": 1.9588,
+  "heldout_delta": -0.4119,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 0.19,
+  "probe_sec": 1.23,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.1
+   "ratio_mean": 0.179
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.187
+   "ratio_mean": 0.27
   },
   "aligned": {
    "n": 8,
@@ -82,21 +82,21 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What is the main goal of the Simons Foundation's $15M effort in relation to m",
-    "exp": "ANSWER: The main goal of the Simons Foundation's $15M effort is to support mathematicians in navigat",
-    "pred_before": "  Answer:\nA:\n\nThe main goal of the Simons Foundation's $15 million effort in relation to mathematici",
-    "pred_after": "ANSWER: The Simons Foundation\u2019s $15 million grant aims to support research into mathematical models "
+    "p": "Q: What is type-safe HTML templating, and how does it improve web development?",
+    "exp": "ANSWER: Type-safe HTML templating is a technique that ensures the correctness and safety of HTML tem",
+    "pred_before": " \nA: Type-safe HTML templating is a technique that uses JavaScript to dynamically generate HTML code",
+    "pred_after": "ANSWER: Type-safe HTML templating is a technique that allows developers to use JavaScript or TypeScr"
    },
    {
-    "p": "Q: What is DNA analysis, and how can it be used to study ancient populations?",
-    "exp": "ANSWER: DNA analysis is the process of examining an organism's genetic material to understand its ch",
-    "pred_before": "  A. genetic information  B. fossil fuels  C. human anatomy  D. climate change  E. weather",
-    "pred_after": "ANSWER: DNA analysis refers to the process of extracting genetic material from a sample (such as a f"
+    "p": "Q: What is ASML, and what role does it play in the technology industry?",
+    "exp": "ANSWER: ASML is a Dutch company that specializes in the design and manufacture of complex lithograph",
+    "pred_before": " \nA: As of 2019, ASML was a leading supplier of advanced lithography equipment for semiconductor",
+    "pred_after": "ANSWER: ASML is a Dutch company that specializes in manufacturing optical components for semiconduct"
    }
   ]
  },
- "runtime_sec": 162.9,
- "cut_by_budget": false,
+ "runtime_sec": 2375.1,
+ "cut_by_budget": true,
  "threads": 4,
  "machine": "x86_64"
 }

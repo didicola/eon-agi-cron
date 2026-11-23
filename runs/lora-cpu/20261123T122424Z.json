@@ -1,0 +1,102 @@
+{
+ "ts": "2026-11-23T12:24:20.944244+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26112311,
+  "ts": "2026-11-23T11:44:45.869046+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26112311
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 10
+ },
+ "loss": {
+  "mean_last": 1.9341,
+  "first5": [
+   1.7557,
+   2.0793,
+   2.6284,
+   1.8481,
+   1.8632
+  ],
+  "last5": [
+   1.4178,
+   1.3989,
+   2.3262,
+   2.0688,
+   1.9541
+  ],
+  "heldout_base": 2.3707,
+  "heldout_after": 1.9588,
+  "heldout_delta": -0.4119,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 1.23,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.179
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.27
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is type-safe HTML templating, and how does it improve web development?",
+    "exp": "ANSWER: Type-safe HTML templating is a technique that ensures the correctness and safety of HTML tem",
+    "pred_before": " \nA: Type-safe HTML templating is a technique that uses JavaScript to dynamically generate HTML code",
+    "pred_after": "ANSWER: Type-safe HTML templating is a technique that allows developers to use JavaScript or TypeScr"
+   },
+   {
+    "p": "Q: What is ASML, and what role does it play in the technology industry?",
+    "exp": "ANSWER: ASML is a Dutch company that specializes in the design and manufacture of complex lithograph",
+    "pred_before": " \nA: As of 2019, ASML was a leading supplier of advanced lithography equipment for semiconductor",
+    "pred_after": "ANSWER: ASML is a Dutch company that specializes in manufacturing optical components for semiconduct"
+   }
+  ]
+ },
+ "runtime_sec": 2375.1,
+ "cut_by_budget": true,
+ "threads": 4,
+ "machine": "x86_64"
+}
