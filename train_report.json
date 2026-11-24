@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-23T12:24:20.944244+00:00",
+ "ts": "2026-11-24T13:18:19.193038+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26112311,
-  "ts": "2026-11-23T11:44:45.869046+00:00"
+  "seed": 26112413,
+  "ts": "2026-11-24T13:15:16.276308+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,50 +29,50 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26112311
+  "seed": 26112413
  },
  "train": {
   "epochs": 1,
   "batch": 2,
   "lr": 0.0002,
   "maxlen": 160,
-  "steps": 10
+  "steps": 63
  },
  "loss": {
-  "mean_last": 1.9341,
+  "mean_last": 1.6855,
   "first5": [
-   1.7557,
-   2.0793,
-   2.6284,
-   1.8481,
-   1.8632
+   2.6109,
+   1.8662,
+   2.1073,
+   1.429,
+   1.8826
   ],
   "last5": [
-   1.4178,
-   1.3989,
-   2.3262,
-   2.0688,
-   1.9541
+   2.4463,
+   1.7527,
+   1.221,
+   1.3496,
+   1.9066
   ],
-  "heldout_base": 2.3707,
-  "heldout_after": 1.9588,
-  "heldout_delta": -0.4119,
+  "heldout_base": 1.9036,
+  "heldout_after": 1.3918,
+  "heldout_delta": -0.5118,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 1.23,
+  "probe_sec": 0.24,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.179
+   "ratio_mean": 0.094
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.27
+   "ratio_mean": 0.256
   },
   "aligned": {
    "n": 8,
@@ -82,21 +82,21 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What is type-safe HTML templating, and how does it improve web development?",
-    "exp": "ANSWER: Type-safe HTML templating is a technique that ensures the correctness and safety of HTML tem",
-    "pred_before": " \nA: Type-safe HTML templating is a technique that uses JavaScript to dynamically generate HTML code",
-    "pred_after": "ANSWER: Type-safe HTML templating is a technique that allows developers to use JavaScript or TypeScr"
+    "p": "Q: What are some tasks that artificial intelligence systems are capable of perfo",
+    "exp": "ANSWER: Artificial intelligence systems are capable of performing tasks such as learning, reasoning,",
+    "pred_before": "  A. making decisions  B. learning from data  C. solving problems  D. understanding language  E.",
+    "pred_after": "ANSWER: Artificial intelligence systems can perform a wide range of tasks, including learning from d"
    },
    {
-    "p": "Q: What is ASML, and what role does it play in the technology industry?",
-    "exp": "ANSWER: ASML is a Dutch company that specializes in the design and manufacture of complex lithograph",
-    "pred_before": " \nA: As of 2019, ASML was a leading supplier of advanced lithography equipment for semiconductor",
-    "pred_after": "ANSWER: ASML is a Dutch company that specializes in manufacturing optical components for semiconduct"
+    "p": "Q: What are Pull Requests in the context of software development and version con",
+    "exp": "ANSWER: Pull Requests are a feature in version control systems, such as GitHub, that allow developer",
+    "pred_before": " A: In the context of software development, a pull request is a feature of Git that allows developer",
+    "pred_after": "ANSWER: In the context of software development, a pull request is a type of commit that allows devel"
    }
   ]
  },
- "runtime_sec": 2375.1,
- "cut_by_budget": true,
+ "runtime_sec": 182.9,
+ "cut_by_budget": false,
  "threads": 4,
  "machine": "x86_64"
 }

@@ -1,0 +1,102 @@
+{
+ "ts": "2026-11-24T13:18:19.193038+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26112413,
+  "ts": "2026-11-24T13:15:16.276308+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26112413
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 63
+ },
+ "loss": {
+  "mean_last": 1.6855,
+  "first5": [
+   2.6109,
+   1.8662,
+   2.1073,
+   1.429,
+   1.8826
+  ],
+  "last5": [
+   2.4463,
+   1.7527,
+   1.221,
+   1.3496,
+   1.9066
+  ],
+  "heldout_base": 1.9036,
+  "heldout_after": 1.3918,
+  "heldout_delta": -0.5118,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 0.24,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.094
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.256
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What are some tasks that artificial intelligence systems are capable of perfo",
+    "exp": "ANSWER: Artificial intelligence systems are capable of performing tasks such as learning, reasoning,",
+    "pred_before": "  A. making decisions  B. learning from data  C. solving problems  D. understanding language  E.",
+    "pred_after": "ANSWER: Artificial intelligence systems can perform a wide range of tasks, including learning from d"
+   },
+   {
+    "p": "Q: What are Pull Requests in the context of software development and version con",
+    "exp": "ANSWER: Pull Requests are a feature in version control systems, such as GitHub, that allow developer",
+    "pred_before": " A: In the context of software development, a pull request is a feature of Git that allows developer",
+    "pred_after": "ANSWER: In the context of software development, a pull request is a type of commit that allows devel"
+   }
+  ]
+ },
+ "runtime_sec": 182.9,
+ "cut_by_budget": false,
+ "threads": 4,
+ "machine": "x86_64"
+}
