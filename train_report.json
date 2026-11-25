@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-24T13:18:19.193038+00:00",
+ "ts": "2026-11-25T12:07:59.836275+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26112413,
-  "ts": "2026-11-24T13:15:16.276308+00:00"
+  "seed": 26112512,
+  "ts": "2026-11-25T12:04:34.641969+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,7 +29,7 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26112413
+  "seed": 26112512
  },
  "train": {
   "epochs": 1,
@@ -39,40 +39,40 @@
   "steps": 63
  },
  "loss": {
-  "mean_last": 1.6855,
+  "mean_last": 1.6786,
   "first5": [
-   2.6109,
-   1.8662,
-   2.1073,
-   1.429,
-   1.8826
+   1.8836,
+   2.0354,
+   1.6404,
+   1.6199,
+   1.908
   ],
   "last5": [
-   2.4463,
-   1.7527,
-   1.221,
-   1.3496,
-   1.9066
+   2.0388,
+   1.3326,
+   1.4618,
+   0.7764,
+   2.283
   ],
-  "heldout_base": 1.9036,
-  "heldout_after": 1.3918,
-  "heldout_delta": -0.5118,
+  "heldout_base": 2.0519,
+  "heldout_after": 1.5208,
+  "heldout_delta": -0.5311,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 0.24,
+  "probe_sec": 0.19,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.094
+   "ratio_mean": 0.193
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.256
+   "ratio_mean": 0.355
   },
   "aligned": {
    "n": 8,
@@ -82,20 +82,20 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What are some tasks that artificial intelligence systems are capable of perfo",
-    "exp": "ANSWER: Artificial intelligence systems are capable of performing tasks such as learning, reasoning,",
-    "pred_before": "  A. making decisions  B. learning from data  C. solving problems  D. understanding language  E.",
-    "pred_after": "ANSWER: Artificial intelligence systems can perform a wide range of tasks, including learning from d"
+    "p": "Q: How does Google achieve high energy efficiency and effective cooling in its d",
+    "exp": "ANSWER: Google uses a combination of advanced hardware design, intelligent workload distribution, an",
+    "pred_before": " A: The company uses a variety of technologies to cool its data centers. These include liquid coolin",
+    "pred_after": "ANSWER: Google achieves high energy efficiency and effective cooling by using a combination of advan"
    },
    {
-    "p": "Q: What are Pull Requests in the context of software development and version con",
-    "exp": "ANSWER: Pull Requests are a feature in version control systems, such as GitHub, that allow developer",
-    "pred_before": " A: In the context of software development, a pull request is a feature of Git that allows developer",
-    "pred_after": "ANSWER: In the context of software development, a pull request is a type of commit that allows devel"
+    "p": "Q: How has holography evolved since its early development, and what are the most",
+    "exp": "ANSWER: Holography, first demonstrated in the 1940s and popularized in the 1960s, began as a laborat",
+    "pred_before": " \nA: The evolution of holography is a fascinating topic. In the early days, it was used to create",
+    "pred_after": "ANSWER: Holography has evolved from a simple optical illusion to a highly advanced technology that c"
    }
   ]
  },
- "runtime_sec": 182.9,
+ "runtime_sec": 205.2,
  "cut_by_budget": false,
  "threads": 4,
  "machine": "x86_64"
