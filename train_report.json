@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-26T11:55:06.632008+00:00",
+ "ts": "2026-11-27T11:45:34.738655+00:00",
  "runner": "github-actions-cpu-4core",
  "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
  "trainer_version": "1.5",
@@ -19,8 +19,8 @@
   "sampled": 140,
   "train": 126,
   "heldout": 14,
-  "seed": 26112611,
-  "ts": "2026-11-26T11:51:54.583575+00:00"
+  "seed": 26112711,
+  "ts": "2026-11-27T11:43:39.948080+00:00"
  },
  "slice": {
   "method": "dedupe+bucket-roundrobin-v1.5",
@@ -29,7 +29,7 @@
   "dupes_dropped": 49,
   "buckets": 573,
   "selected": 140,
-  "seed": 26112611
+  "seed": 26112711
  },
  "train": {
   "epochs": 1,
@@ -39,40 +39,40 @@
   "steps": 63
  },
  "loss": {
-  "mean_last": 1.7204,
+  "mean_last": 1.735,
   "first5": [
-   2.5179,
-   2.4644,
-   1.292,
-   1.3947,
-   2.315
+   2.3308,
+   2.1556,
+   1.5975,
+   1.5613,
+   1.927
   ],
   "last5": [
-   1.3875,
-   1.6533,
-   1.9004,
-   1.1594,
-   1.7232
+   1.5685,
+   1.6392,
+   1.7208,
+   2.3813,
+   1.5636
   ],
-  "heldout_base": 2.2212,
-  "heldout_after": 1.5907,
-  "heldout_delta": -0.6305,
+  "heldout_base": 2.3608,
+  "heldout_after": 1.8833,
+  "heldout_delta": -0.4775,
   "heldout_n": 14
  },
  "gen_eval": {
   "k": 8,
   "max_new_tokens": 24,
-  "probe_sec": 0.18,
+  "probe_sec": 0.13,
   "pass_budget_sec": 420.0,
   "before": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.166
+   "ratio_mean": 0.157
   },
   "after": {
    "done": 8,
    "em": 0,
-   "ratio_mean": 0.303
+   "ratio_mean": 0.223
   },
   "aligned": {
    "n": 8,
@@ -82,20 +82,20 @@
   "skipped": null,
   "examples": [
    {
-    "p": "Q: What is borrow checking in the context of programming, and how does it relate",
-    "exp": "ANSWER: Borrow checking is a mechanism in programming languages that ensures memory safety by tracki",
-    "pred_before": " \nA: Borrow checking is a technique used by compilers to detect potential memory leaks. It involves ",
-    "pred_after": "ANSWER: Borrow checking is a technique used in programming to prevent memory leaks by ensuring that "
+    "p": "Q: What is Indigene and how does it use technology to recommend native plants fo",
+    "exp": "ANSWER: Indigene is a location\u2011aware web/app platform that helps people discover native plant specie",
+    "pred_before": " \nA: The term \"Indigen\" refers to indigenous people, who are the original inhabitants of a place. Th",
+    "pred_after": "ANSWER: Indigo is an open-source, web-based platform that uses machine learning algorithms to analyz"
    },
    {
-    "p": "What is the main purpose of machine learning within the field of artificial inte",
-    "exp": "ANSWER: Machine learning aims to develop and study statistical algorithms that can learn from data, ",
-    "pred_before": " Machine learning plays a crucial role in the field of artificial intelligence by enabling computers",
-    "pred_after": "ANSWER: Machine learning aims to develop algorithms that can learn from data, identify patterns and "
+    "p": "Q: What is a hydropower turbine and how does it generate electricity?",
+    "exp": "ANSWER: A hydropower turbine is a device that converts the energy of moving water into electricity. ",
+    "pred_before": " \nA: A hydroelectric power plant consists of a dam, turbines, and a generator. The turbines convert ",
+    "pred_after": "ANSWER: A hydropower turbine is an electrical generator that uses the power of flowing water to turn"
    }
   ]
  },
- "runtime_sec": 192.0,
+ "runtime_sec": 114.8,
  "cut_by_budget": false,
  "threads": 4,
  "machine": "x86_64"
