@@ -1,0 +1,102 @@
+{
+ "ts": "2026-11-28T11:21:06.357806+00:00",
+ "runner": "github-actions-cpu-4core",
+ "mandate": "standing owner order 2026-10-16 (EON ONE): unattended cloud trainer",
+ "trainer_version": "1.5",
+ "model": "Qwen/Qwen2.5-0.5B-Instruct",
+ "adapter": {
+  "out": "adapter_out",
+  "r": 16,
+  "alpha": 32,
+  "target_modules": 7,
+  "trainable_params": 8798208
+ },
+ "data": {
+  "file": "distill_norm.jsonl",
+  "corpus": 6166,
+  "usable_rows": 6166,
+  "unusable_rows": 0,
+  "sampled": 140,
+  "train": 126,
+  "heldout": 14,
+  "seed": 26112811,
+  "ts": "2026-11-28T11:19:06.891176+00:00"
+ },
+ "slice": {
+  "method": "dedupe+bucket-roundrobin-v1.5",
+  "pool": 6166,
+  "unique": 6117,
+  "dupes_dropped": 49,
+  "buckets": 573,
+  "selected": 140,
+  "seed": 26112811
+ },
+ "train": {
+  "epochs": 1,
+  "batch": 2,
+  "lr": 0.0002,
+  "maxlen": 160,
+  "steps": 63
+ },
+ "loss": {
+  "mean_last": 1.7642,
+  "first5": [
+   1.9236,
+   2.4621,
+   1.289,
+   2.5094,
+   1.6101
+  ],
+  "last5": [
+   1.3803,
+   2.2846,
+   1.3218,
+   1.4851,
+   1.3782
+  ],
+  "heldout_base": 2.3484,
+  "heldout_after": 1.891,
+  "heldout_delta": -0.4574,
+  "heldout_n": 14
+ },
+ "gen_eval": {
+  "k": 8,
+  "max_new_tokens": 24,
+  "probe_sec": 0.14,
+  "pass_budget_sec": 420.0,
+  "before": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.147
+  },
+  "after": {
+   "done": 8,
+   "em": 0,
+   "ratio_mean": 0.217
+  },
+  "aligned": {
+   "n": 8,
+   "em_before": 0,
+   "em_after": 0
+  },
+  "skipped": null,
+  "examples": [
+   {
+    "p": "Q: What is the context of \"Catch a Bird\" in the given tech news headline, and wh",
+    "exp": "ANSWER: In the context of the headline, \"Catch a Bird\" appears to be a technological project or appl",
+    "pred_before": " \nA: The context of \"Catch a Bird\" in the given tech news headline is that it is a viral video",
+    "pred_after": "ANSWER: The context of \"Catch a Bird\" is that it refers to a game or app that allows users to"
+   },
+   {
+    "p": "Q: What does \"Unsiloed\" mean in the context of document review, and how can it e",
+    "exp": "ANSWER: In the context of document review, \"Unsiloed\" refers to the ability to access, analyze, and ",
+    "pred_before": " \nA: Unsilosing is a technique used to improve the performance of document review by reducing the nu",
+    "pred_after": "ANSWER: In the context of document review, \"Unsiloed\" refers to a feature that allows users to"
+   }
+  ]
+ },
+ "runtime_sec": 119.5,
+ "cut_by_budget": false,
+ "threads": 4,
+ "machine": "x86_64"
+}
